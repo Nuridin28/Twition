@@ -1,1 +1,1 @@
-Twition
+Twitter + Notion = Twition
