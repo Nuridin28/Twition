@@ -1,0 +1,36 @@
+@import url('../../../../public/assets/_fonts..css');
+
+.container-1 {
+  display: grid;
+  grid-template-columns: 309px 1131px;
+  grid-template-rows: 1024px;
+}
+
+.container-2 {
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid violet;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-search {
+  top: 32px;
+  width: 279px;
+  height: 40px;
+}
+.form-search input {
+  padding-left: 12px;
+  text-align: left;
+  width: 227px;
+  height: 40px;
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #272727;
+  border-radius: 7px;
+}
+.form-search input::placeholder {
+  color: #ffffff;
+  font-family: 'Poppins';
+}
