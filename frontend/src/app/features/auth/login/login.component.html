@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="page">
+    <div class="login-container">
+        <h2>Sign In</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" [(ngModel)]="username" name="username" required
+                    placeholder="Enter your username" />
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input id="password" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password"
+                        name="password" required placeholder="Enter your password" />
+                    <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">👁</button>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn-primary">Sign In</button>
+                <button type="button" class="btn-secondary">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
