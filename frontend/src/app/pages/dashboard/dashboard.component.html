@@ -1,14 +1,14 @@
 <div class="container-1">
-  <div class="container-2 sidebar-component item">
+  <div class="container-2 sidebar-component">
 
     <!-- Search section -->
     <section>
       <form class="form-search">
 
-        <input type="text" id="search-field" placeholder="Search">
+        <input type="text" id="form-search__input" class="poppins-400" placeholder="Search">
 
-        <button type="submit">
-          <img src="/search-icon.svg">
+        <button type="submit" class="form-search__btn">
+          <img src="/assets/images/search-icon.svg" width="16px">
         </button>
 
       </form>
@@ -17,14 +17,16 @@
     <section>
       <form class="form-search-filter">
 
-        <header>
-          <img src="filtro.svg">
-          <span>Filtro</span>
+        <header class="form-search-filter__header">
+          <img src="/assets/images/filtro-icon.svg">
+          <span class="poppins-500">Filtro</span>
         </header>
 
-        <div class="label-tags-container">
+        <div class="form-search-filter__label-tags-container">
           <div class="label-tag">
-            <a href="/search/tag-id">Tag Name</a>
+            <button type="button" class="label-tags-container__btn">
+              <a href="/dashboard/search/tag-id" class="poppins-600 label-tags-container__label-tag">Laravel</a>
+            </button>
           </div>
         </div>
 
@@ -32,16 +34,14 @@
     </section>
 
     <!-- File explorer section  -->
-    <section>
+    <section class="file-explorer-component">
 
-      <p>Categories</p>
-      <hr>
+      <p class="poppins-400 categories">Categories</p>
+      <hr class="hr">
 
       <div class="documents-list-component">
         <div class="document-item-component">
-          <img src="folder-icon.svg">
-          <!-- I think we can just use enum and not image as Input field?         -->
-          <span>Folder name or document name</span>
+
         </div>
       </div>
 
@@ -50,22 +50,26 @@
 
   <div class="container-3">
     <div class="document-editor-component">
-      <header>
-        <h1>Hello World</h1>
+      <header class="document-editor-component__header">
+        <h1 class="open-document-name poppins-400">Hello World</h1>
         <p>
-          <span>Document location</span>
-          <span>Last time edited</span>
+          <span class="document-info">
+            <img src="/assets/images/folder-icon.svg">
+            Document location
+          </span>
+          <span class="document-info">
+            <img src="/assets/images/clock-icon.svg">
+            Last time edited
+          </span>
         </p>
         <hr>
         <div class="document-tags">
-          <p>
             <span>#Tag</span>
             <span>#Tag</span>
             <span>#Tag</span>
-          </p>
         </div>
       </header>
-      <p>TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText</p>
+      <p class="text">TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText</p>
     </div>
   </div>
 </div>
