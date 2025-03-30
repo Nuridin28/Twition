@@ -1,0 +1,47 @@
+<div class="page">
+    <div class="register-container">
+        <h2>Sign Up</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div class="input-group">
+                <label for="fullname">Full Name</label>
+                <input id="fullname" type="text" [(ngModel)]="fullname" name="fullname" required
+                    placeholder="Enter your full name" />
+            </div>
+
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" [(ngModel)]="username" name="username" required
+                    placeholder="Choose a username" />
+            </div>
+
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input id="password" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password"
+                        name="password" required placeholder="Enter a strong password" />
+                    <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">👁</button>
+                </div>
+            </div>
+
+
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input id="confirmPassword" [type]="hideConfirmPassword ? 'password' : 'text'"
+                        [(ngModel)]="confirmPassword" name="confirmPassword" required
+                        placeholder="Repeat your password" />
+                    <button type="button" class="toggle-password"
+                        (click)="toggleConfirmPasswordVisibility()">👁</button>
+                </div>
+                <small *ngIf="passwordMismatch" class="error">Passwords do not match</small>
+            </div>
+
+
+            <div class="buttons">
+                <button type="submit" class="btn-primary" [disabled]="passwordMismatch">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

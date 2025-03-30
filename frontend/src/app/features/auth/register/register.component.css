@@ -6,12 +6,12 @@
     background-color: #f4f4f4;
   }
   
-  .login-container {
+  .register-container {
     background: white;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 320px;
+    width: 350px;
     text-align: center;
   }
   
@@ -47,6 +47,7 @@
     outline: none;
   }
   
+
   .password-wrapper {
     display: flex;
     align-items: center;
@@ -60,22 +61,28 @@
   
   .toggle-password {
     position: absolute;
-    right: -40px;
+    right: -120px;
     border: none;
     background: none;
     cursor: pointer;
     font-size: 16px;
   }
   
+
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+
   .buttons {
-    display: flex;
-    justify-content: space-between;
     margin-top: 1rem;
   }
   
   button {
     padding: 10px;
-    width: 48%;
+    width: 100%;
     border: none;
     border-radius: 4px;
     font-size: 14px;
@@ -92,12 +99,8 @@
     background-color: #0056b3;
   }
   
-  .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #545b62;
+  .btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
   

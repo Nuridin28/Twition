@@ -10,6 +10,7 @@
   --filtro-color: #484848;
   --categories-color: #868686;
   --tags-color: #898989;
+  --background-black : #272727
 }
 
 * {
@@ -20,6 +21,7 @@
 
 body {
   color: var(--light-color);
+  background: var(--background-black);
 }
 
 
