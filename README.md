@@ -1,4 +1,4 @@
-# Twitter + Notion = Twition
+# Twitter + Notion = Twittion
 
 **Application with both features of Twitter and Notion:**
 Create notes and share them with your friends and subscribers.
