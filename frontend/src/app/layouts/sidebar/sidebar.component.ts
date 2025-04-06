@@ -14,28 +14,4 @@ import {FileNode} from '../../core/file-node';
 })
 export class SidebarComponent {
 
-  toggleFolder(node: FileNode) {
-    node.expanded = !node.expanded;
-  }
-
-  treeData: FileNode[] = [
-    {
-      name: 'Projects',
-      type: 'folder',
-      expanded: false,
-      children: [
-        { name: 'Project1.docx', type: 'document' },
-        {
-          name: 'Archive',
-          type: 'folder',
-          expanded: false,
-          children: [
-            { name: 'OldProject.docx', type: 'document' }
-          ]
-        }
-      ]
-    },
-    { name: 'Readme.md', type: 'document' }
-  ];
-
 }
