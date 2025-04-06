@@ -6,7 +6,9 @@
   flex-direction: column;
   gap: 16px;
   background-color: var(--interface-color);
-  border: 1px solid red;
+
+
+  /*border: 1px solid red;*/
 }
 
 .form-search {
@@ -17,7 +19,9 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  border: 1px solid blue;
+
+
+  /*border: 1px solid blue;*/
 }
 
 .form-search #form-search__input {
@@ -31,7 +35,7 @@
   border-radius: 7px;
 
 
-  border: 1px solid green;
+  /*border: 1px solid green;*/
 }
 
 .form-search #form-search__input::placeholder {
@@ -53,6 +57,7 @@
 .form-search .form-search__btn:hover {
   cursor: pointer;
 }
+
 
 .form-search-filter {
   width: 279px;
@@ -137,14 +142,14 @@
 
 .categories__label {
   color: var(--categories-color);
-  background-color: red;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .hr {
   border: 1px solid var(--categories-color);
-
   width: 279px;
+
+  margin-bottom: 20px;
 }
 
 .poppins-500 {
@@ -183,18 +188,58 @@
 
 .custom-checkbox span {
   position: absolute;
-  top: 0;
-  left: 0;
+
   width: 100%;
   height: 100%;
-  background-color: #fff;
-  border: 2px solid #333;
+
+
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   font-size: 14px;
-  color: #333;
-  pointer-events: none;
+
+  /*pointer-events: none;*/
+}
+
+.tree-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  user-select: none;
+}
+
+.tree-node {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+}
+
+.node-row {
+  border-left: 1px solid var(--blue-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+  transition: border-left-color 1s ease;
+
+  &:hover {
+    border-left-color: white;
+  }
+}
+
+.icon {
+  width: 12px;
+  display: inline-block;
+  text-align: center;
+}
+
+.node-name {
+  margin-left: 6px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  color: var(--light-color);
 }

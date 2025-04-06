@@ -37,7 +37,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
+              "src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -90,7 +93,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
+              "src/styles.css"
+            ],
             "scripts": []
           }
         }

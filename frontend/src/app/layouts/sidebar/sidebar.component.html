@@ -40,10 +40,54 @@
 <!-- File explorer section  -->
 <section class="categories">
 
-
   <p class="poppins-400 categories__label">Categories</p>
   <hr class="hr">
 
-  <app-file-explorer></app-file-explorer>
+  <!-- sidebar-tree.component.html -->
+  <div class="tree-container">
+
+<!--    first-main-layer-->
+    <ng-container *ngFor="let node of treeData">
+      <ng-container *ngTemplateOutlet="treeNode; context: { $implicit: node, level: 0 }"></ng-container>
+    </ng-container>
+
+<!--    template of node-->
+    <ng-template #treeNode let-node let-level="level">
+
+      <div class="tree-node" [style.padding-left.px]="level * 5 ">
+
+        <div class="node-row" (click)="node.type === 'folder' && toggleFolder(node)">
+          <span class="icon">
+            @if (node.type === 'folder') {
+              <img src="/assets/images/folder-icon.svg" alt="folder" *ngIf="node.expanded === false">
+              <img src="/assets/images/active-folder-icon.svg" alt="active-folder" *ngIf="node.expanded === true">
+            }
+            @else {
+              <img src="/assets/images/document.svg" alt="document" *ngIf="node.type ==='document' ">
+            }
+          </span>
+          <span class="node-name">{{ node.name }}</span>
+        </div>
+
+        <!-- next layer -->
+        <ng-container *ngIf="node.children && node.expanded">
+          <ng-container *ngFor="let child of node.children">
+            <ng-container *ngTemplateOutlet="treeNode; context: { $implicit: child, level: level + 1 }"></ng-container>
+          </ng-container>
+        </ng-container>
+
+      </div>
+
+    </ng-template>
+
+
+  </div>
+
+
+
+
+<!--  <app-file-explorer></app-file-explorer>-->
+
+
 </section>
 
