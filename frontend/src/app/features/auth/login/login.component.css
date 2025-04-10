@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: var(--background-black);
   }
   
   .login-container {
@@ -101,3 +101,37 @@
     background-color: #545b62;
   }
   
+  .password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper app-input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.eye-icon:hover {
+  color: #007bff;
+}
+
+.eye-icon.visible {
+  color: #007bff;
+}

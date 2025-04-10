@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: var(--background-black);
   }
   
   .register-container {
@@ -61,7 +61,7 @@
   
   .toggle-password {
     position: absolute;
-    right: -120px;
+    right: -1px;
     border: none;
     background: none;
     cursor: pointer;
@@ -78,11 +78,12 @@
 
   .buttons {
     margin-top: 1rem;
+    display: flex; gap: 20px; justify-content: space-between;
   }
   
   button {
     padding: 10px;
-    width: 100%;
+    /* width: 100%; */
     border: none;
     border-radius: 4px;
     font-size: 14px;
@@ -93,6 +94,7 @@
   .btn-primary {
     background-color: #007bff;
     color: white;
+    width: 100%;
   }
   
   .btn-primary:hover {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,8 @@ export class RegisterComponent {
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
 
+  constructor(private router: Router) {}
+
   get passwordMismatch(): boolean {
     return (
       this.password !== this.confirmPassword && this.confirmPassword.length > 0
@@ -28,6 +31,11 @@ export class RegisterComponent {
 
   toggleConfirmPasswordVisibility() {
     this.hideConfirmPassword = !this.hideConfirmPassword;
+  }
+
+  navigateToLogin() {
+    alert('Redirecting to login page...');
+    this.router.navigate(['/auth/login']);
   }
 
   onSubmit() {
