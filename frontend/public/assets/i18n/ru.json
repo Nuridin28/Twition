@@ -1,0 +1,60 @@
+{
+  "LOGIN": {
+    "TITLE": "Добро пожаловать",
+    "SUBTITLE": "Войдите в свой аккаунт",
+    "EMAIL": "Электронная почта",
+    "EMAIL_PLACEHOLDER": "Введите вашу почту",
+    "EMAIL_ERROR": "Пожалуйста, введите корректный адрес почты",
+    "PASSWORD": "Пароль",
+    "PASSWORD_PLACEHOLDER": "Введите ваш пароль",
+    "PASSWORD_ERROR": "Пароль должен содержать минимум 6 символов",
+    "REMEMBER_ME": "Запомнить меня",
+    "FORGOT_PASSWORD": "Забыли пароль?",
+    "SIGN_IN": "Войти",
+    "NO_ACCOUNT": "Нет аккаунта?",
+    "SIGN_UP": "Зарегистрироваться"
+  },
+  "REGISTER": {
+    "TITLE": "Создать аккаунт",
+    "SUBTITLE": "Присоединяйтесь к нашему сообществу",
+    "FIRST_NAME": "Имя",
+    "FIRST_NAME_PLACEHOLDER": "Введите ваше имя",
+    "FIRST_NAME_ERROR": "Имя обязательно",
+    "LAST_NAME": "Фамилия",
+    "LAST_NAME_PLACEHOLDER": "Введите вашу фамилию",
+    "LAST_NAME_ERROR": "Фамилия обязательна",
+    "EMAIL": "Электронная почта",
+    "EMAIL_PLACEHOLDER": "Введите вашу почту",
+    "EMAIL_ERROR": "Пожалуйста, введите корректный адрес почты",
+    "PASSWORD": "Пароль",
+    "PASSWORD_PLACEHOLDER": "Создайте надежный пароль",
+    "PASSWORD_ERROR": "Пароль должен содержать минимум 8 символов, включая заглавные, строчные буквы, цифры и специальные символы",
+    "CONFIRM_PASSWORD": "Подтвердите пароль",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Подтвердите ваш пароль",
+    "PASSWORD_MISMATCH": "Пароли не совпадают",
+    "AGREE_TERMS_1": "Я согласен с",
+    "TERMS": "Условиями использования",
+    "AND": "и",
+    "PRIVACY_POLICY": "Политикой конфиденциальности",
+    "AGREE_TERMS_2": "",
+    "AGREE_TERMS_ERROR": "Вы должны согласиться с условиями и политикой конфиденциальности",
+    "PASSWORD_STRENGTH": {
+      "NONE": "Нет пароля",
+      "VERY_WEAK": "Очень слабый",
+      "WEAK": "Слабый",
+      "MEDIUM": "Средний",
+      "STRONG": "Сильный",
+      "VERY_STRONG": "Очень сильный"
+    },
+    "CREATE_ACCOUNT": "Создать аккаунт",
+    "ALREADY_HAVE_ACCOUNT": "Уже есть аккаунт?",
+    "SIGN_IN": "Войти",
+    "NEXT": "Далее",
+    "BACK": "Назад"
+  },
+  "THEME": {
+    "LIGHT": "Светлая",
+    "DARK": "Темная",
+    "DEVICE": "Системная"
+  }
+}

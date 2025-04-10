@@ -1,0 +1,60 @@
+{
+  "LOGIN": {
+    "TITLE": "Қош келдіңіз",
+    "SUBTITLE": "Аккаунтыңызға кіріңіз",
+    "EMAIL": "Электрондық пошта",
+    "EMAIL_PLACEHOLDER": "Поштаңызды енгізіңіз",
+    "EMAIL_ERROR": "Жарамды электрондық пошта мекенжайын енгізіңіз",
+    "PASSWORD": "Құпия сөз",
+    "PASSWORD_PLACEHOLDER": "Құпия сөзіңізді енгізіңіз",
+    "PASSWORD_ERROR": "Құпия сөз кемінде 6 таңбадан тұруы керек",
+    "REMEMBER_ME": "Мені есте сақтау",
+    "FORGOT_PASSWORD": "Құпия сөзді ұмыттыңыз ба?",
+    "SIGN_IN": "Кіру",
+    "NO_ACCOUNT": "Аккаунтыңыз жоқ па?",
+    "SIGN_UP": "Тіркелу"
+  },
+  "REGISTER": {
+    "TITLE": "Аккаунт жасау",
+    "SUBTITLE": "Біздің қауымдастыққа қосылыңыз",
+    "FIRST_NAME": "Аты",
+    "FIRST_NAME_PLACEHOLDER": "Атыңызды енгізіңіз",
+    "FIRST_NAME_ERROR": "Аты міндетті",
+    "LAST_NAME": "Тегі",
+    "LAST_NAME_PLACEHOLDER": "Тегіңізді енгізіңіз",
+    "LAST_NAME_ERROR": "Тегі міндетті",
+    "EMAIL": "Электрондық пошта",
+    "EMAIL_PLACEHOLDER": "Поштаңызды енгізіңіз",
+    "EMAIL_ERROR": "Жарамды электрондық пошта мекенжайын енгізіңіз",
+    "PASSWORD": "Құпия сөз",
+    "PASSWORD_PLACEHOLDER": "Күшті құпия сөз жасаңыз",
+    "PASSWORD_ERROR": "Құпия сөз кемінде 8 таңбадан тұруы керек, бас әріптер, кіші әріптер, сандар және арнайы таңбалар болуы керек",
+    "CONFIRM_PASSWORD": "Құпия сөзді растаңыз",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Құпия сөзіңізді растаңыз",
+    "PASSWORD_MISMATCH": "Құпия сөздер сәйкес келмейді",
+    "AGREE_TERMS_1": "Мен",
+    "TERMS": "Қызмет көрсету шарттарымен",
+    "AND": "және",
+    "PRIVACY_POLICY": "Құпиялылық саясатымен",
+    "AGREE_TERMS_2": "келісемін",
+    "AGREE_TERMS_ERROR": "Шарттар мен құпиялылық саясатымен келісуіңіз керек",
+    "PASSWORD_STRENGTH": {
+      "NONE": "Құпия сөз жоқ",
+      "VERY_WEAK": "Өте әлсіз",
+      "WEAK": "Әлсіз",
+      "MEDIUM": "Орташа",
+      "STRONG": "Күшті",
+      "VERY_STRONG": "Өте күшті"
+    },
+    "CREATE_ACCOUNT": "Аккаунт жасау",
+    "ALREADY_HAVE_ACCOUNT": "Аккаунтыңыз бар ма?",
+    "SIGN_IN": "Кіру",
+    "NEXT": "Келесі",
+    "BACK": "Артқа"
+  },
+  "THEME": {
+    "LIGHT": "Жарық",
+    "DARK": "Қараңғы",
+    "DEVICE": "Құрылғы"
+  }
+}
