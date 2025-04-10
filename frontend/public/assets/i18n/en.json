@@ -1,0 +1,63 @@
+{
+  "LOGIN": {
+    "TITLE": "Welcome Back",
+    "SUBTITLE": "Sign in to your account",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Enter your email",
+    "EMAIL_ERROR": "Please enter a valid email address",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Enter your password",
+    "PASSWORD_ERROR": "Password must be at least 6 characters",
+    "REMEMBER_ME": "Remember me",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "SIGN_IN": "Sign In",
+    "NO_ACCOUNT": "Don't have an account?",
+    "SIGN_UP": "Sign Up"
+  },
+  "REGISTER": {
+    "TITLE": "Create Account",
+    "SUBTITLE": "Join our community today",
+    "FIRST_NAME": "First Name",
+    "FIRST_NAME_PLACEHOLDER": "Enter your first name",
+    "FIRST_NAME_ERROR": "First name is required",
+    "LAST_NAME": "Last Name",
+    "LAST_NAME_PLACEHOLDER": "Enter your last name",
+    "LAST_NAME_ERROR": "Last name is required",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Enter your email",
+    "EMAIL_ERROR": "Please enter a valid email address",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Create a strong password",
+    "PASSWORD_ERROR": "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Confirm your password",
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "AGREE_TERMS_1": "I agree to the",
+    "TERMS": "Terms of Service",
+    "AND": "and",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "AGREE_TERMS_2": "",
+    "AGREE_TERMS_ERROR": "and",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "AGREE_TERMS_2": "",
+    "AGREE_TERMS_ERROR": "You must agree to the terms and privacy policy",
+    "PASSWORD_STRENGTH": {
+      "NONE": "No password",
+      "VERY_WEAK": "Very weak",
+      "WEAK": "Weak",
+      "MEDIUM": "Medium",
+      "STRONG": "Strong",
+      "VERY_STRONG": "Very strong"
+    },
+    "CREATE_ACCOUNT": "Create Account",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "SIGN_IN": "Sign In",
+    "NEXT": "Next",
+    "BACK": "Back"
+  },
+  "THEME": {
+    "LIGHT": "Light",
+    "DARK": "Dark",
+    "DEVICE": "Device"
+  }
+}
