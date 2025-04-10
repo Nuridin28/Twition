@@ -1,0 +1,50 @@
+.tree-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  user-select: none;
+
+  /*padding: 0;*/
+  /*margin: 0;*/
+
+}
+
+.tree-node {
+  /*display: grid;*/
+  /*grid-template-columns: 20px;*/
+  /*align-items: center;*/
+  padding-left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.node-row {
+  border-left: 1px solid var(--blue-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+  transition: border-left-color 0.5s ease;
+
+  &:hover {
+    border-left-color: white;
+  }
+}
+
+.icon {
+  width: 12px;
+  /*display: inline-block;*/
+  text-align: center;
+}
+
+.node-name {
+  margin-left: 6px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  color: var(--light-color);
+}
