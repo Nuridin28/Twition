@@ -10,16 +10,56 @@
   --filtro-color: #484848;
   --categories-color: #868686;
   --tags-color: #898989;
+  --background-black : #272727
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.theme-light {
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+body.theme-dark {
+  /* background-color: #111827;
+  color: #f9fafb; */
+
+  color: var(--light-color);
+  background: var(--background-black);
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 body {
   color: var(--light-color);
+  background: var(--background-black);
 }
 
 

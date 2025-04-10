@@ -1,1 +1,109 @@
-<p>login works!</p>
+<div class="login-container" [ngClass]="'theme-' + themeService.currentTheme">
+    <div class="login-card" [@fadeInOut]>
+        <div class="login-header">
+            <div class="login-logo">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="40" fill="#4F46E5" opacity="0.1" />
+                    <path d="M40 20L56.5685 36.5685L40 53.1371L23.4315 36.5685L40 20Z" fill="#4F46E5" />
+                    <circle cx="40" cy="40" r="8" fill="#4F46E5" />
+                </svg>
+            </div>
+            <h1 class="login-title" [@slideIn]>{{ 'LOGIN.TITLE' | translate }}</h1>
+            <p class="login-subtitle" [@slideIn]>{{ 'LOGIN.SUBTITLE' | translate }}</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-element">
+                <label for="email" class="form-label">{{ 'LOGIN.EMAIL' | translate }}</label>
+                <input type="email" id="email" formControlName="email" class="form-input"
+                    [placeholder]="'LOGIN.EMAIL_PLACEHOLDER' | translate">
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+                    {{ 'LOGIN.EMAIL_ERROR' | translate }}
+                </div>
+            </div>
+
+            <div class="form-element">
+                <label for="password" class="form-label">{{ 'LOGIN.PASSWORD' | translate }}</label>
+                <div class="password-field">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+                        class="form-input" [placeholder]="'LOGIN.PASSWORD_PLACEHOLDER' | translate">
+                    <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+                        [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                        <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                            </path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                    class="error-message">
+                    {{ 'LOGIN.PASSWORD_ERROR' | translate }}
+                </div>
+            </div>
+
+            <div class="form-element remember-forgot">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="rememberMe" formControlName="rememberMe" class="checkbox-input">
+                    <label for="rememberMe">{{ 'LOGIN.REMEMBER_ME' | translate }}</label>
+                </div>
+                <a href="#" class="forgot-link">{{ 'LOGIN.FORGOT_PASSWORD' | translate }}</a>
+            </div>
+
+            <div class="form-element">
+                <button type="submit" class="login-button" [disabled]="loginForm.invalid || isLoading">
+                    <span *ngIf="!isLoading">{{ 'LOGIN.SIGN_IN' | translate }}</span>
+                    <span *ngIf="isLoading" class="loading-spinner"></span>
+                </button>
+            </div>
+
+            <div *ngIf="errorMessage" class="error-message" [@fadeInOut]>
+                {{ errorMessage }}
+            </div>
+
+            <div class="register-prompt">
+                {{ 'LOGIN.NO_ACCOUNT' | translate }}
+                <a (click)="navigateToRegister()" class="register-link">{{ 'LOGIN.SIGN_UP' | translate }}</a>
+            </div>
+
+            <div class="language-switcher">
+                <button type="button" class="language-button"
+                    [ngClass]="{'active': translateService.currentLang === 'en'}" (click)="switchLanguage('en')">
+                    English
+                </button>
+                <button type="button" class="language-button"
+                    [ngClass]="{'active': translateService.currentLang === 'ru'}" (click)="switchLanguage('ru')">
+                    Русский
+                </button>
+                <button type="button" class="language-button"
+                    [ngClass]="{'active': translateService.currentLang === 'kk'}" (click)="switchLanguage('kk')">
+                    Қазақша
+                </button>
+            </div>
+
+            <div class="theme-switcher">
+                <button type="button" class="theme-button" [ngClass]="{'active': themeService.currentTheme === 'light'}"
+                    (click)="switchTheme('light')">
+                    {{ 'THEME.LIGHT' | translate }}
+                </button>
+                <button type="button" class="theme-button" [ngClass]="{'active': themeService.currentTheme === 'dark'}"
+                    (click)="switchTheme('dark')">
+                    {{ 'THEME.DARK' | translate }}
+                </button>
+                <button type="button" class="theme-button"
+                    [ngClass]="{'active': themeService.currentTheme === 'device'}" (click)="switchTheme('device')">
+                    {{ 'THEME.DEVICE' | translate }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
