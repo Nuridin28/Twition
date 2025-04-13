@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-user-profile',
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
 })
 export class UserProfileComponent {
+  constructor(private location: Location) {}
   // it is default avatar(because in register there is no upload avatar option)
   defaultAvatar = '/assets/images/default.jpg';
   // flag to toggle between view and edit modes
@@ -64,5 +66,9 @@ export class UserProfileComponent {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  goBack() {
+    this.location.back(); 
   }
 }
