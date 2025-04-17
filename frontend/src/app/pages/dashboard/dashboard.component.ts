@@ -12,5 +12,4 @@ import {DocumentEditorComponent} from '../../features/documents/document-editor/
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
 }

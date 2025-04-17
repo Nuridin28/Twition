@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import {FileNode} from '../../../core/file-node';
 import {CommonModule} from '@angular/common';
+import {DocumentService} from '../document.service';
+import {Folder} from '../../../core/interfaces/folder';
+import {AppFile} from '../../../core/interfaces/file';
+
 
 @Component({
   selector: 'app-file-explorer',
@@ -12,42 +16,37 @@ import {CommonModule} from '@angular/common';
 })
 export class FileExplorerComponent {
 
-  toggleFolder(node: FileNode) {
-    node.expanded = !node.expanded;
+  constructor(private documentService: DocumentService) {}
+
+  treeData: Array<Folder | AppFile> = [];
+  selectedFolder: Folder | null = null;
+
+  createNewNote() {
+    let file: AppFile = {
+      id: 0,
+      title: 'Title',
+      author: 'admin',
+      content: 'texttexttext',
+      folder: null,
+      tags: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      type: 'document',
+    }
+    this.treeData.push(file);
   }
 
-  treeData: FileNode[] = [
-    {
-      name: 'Projects',
-      type: 'folder',
-      expanded: false,
-      children: [
-        { name: 'Project1.docx', type: 'document' },
-        {
-          name: 'Archive',
-          type: 'folder',
-          expanded: false,
-          children: [
-            { name: 'OldProject.docx', type: 'document' },
-            {
-              name: 'folder3',
-              type: 'folder',
-              expanded: false,
-              children: [
-                { name: 'OldProject.docx', type: 'document' },
-              ]}
-          ]
-        },
-        {
-          name: 'folder3',
-          type: 'folder',
-          expanded: false,
-          children: [
-            { name: 'OldProject.docx', type: 'document' },
-          ]}
-      ]
-    },
-    { name: 'Readme.md', type: 'document' }
-  ];
+  createNewFolder() {
+
+  }
+
+  onClickFile(document: AppFile) {
+    console.log(document);
+    this.documentService.selectDocument(document);
+  }
+
+  toggleFolder(node: Folder) {
+    node.expanded = !node.expanded;
+  }
 
 }

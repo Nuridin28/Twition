@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.request import Request
 
@@ -6,17 +5,28 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from  rest_framework import status
 
+from .serilizers import *
+
 from .models import *
-from accounts.models import User
 
 # Create your views here.
-class AllFilesView(APIView):
+class FilesTreeView(APIView):
     permission_classes = [permissions.AllowAny]
-    def get_object(self):
-        return self.request.user.is_authenticated
+
+    @staticmethod
+    def get_object():
+        folders = Folder.objects.all()
+
+        def construct_tree():
+            tree = []
+            for folder in folders:
+                if folder.parent is None:
+                    tree.append(folder)
+
+            return tree
+
+        return construct_tree()
 
     def get(self, request):
-        print(request)
-        if get_object := self.get_object():
-            return Response({"auth": str(get_object)})
-        return Response({'auth': False})
+        folderSerilizer = FolderSerializer(self.get_object(), many=True)
+        return Response(folderSerilizer.data)

@@ -1,4 +1,19 @@
 <!-- sidebar-tree.component.html -->
+<header>
+  <p class="poppins-400 categories__label">File explorer</p>
+
+  <div class="buttons">
+    <button class="btn-create-new-note" (click)="createNewNote()">
+      <img src="/assets/icons/create-note.svg">
+    </button>
+    <button class="btn-create-new-folder" (click)="createNewFolder()">
+      <img src="/assets/icons/folder-create.svg">
+    </button>
+  </div>
+</header>
+
+<hr class="hr">
+
 <div class="tree-container">
 
   <!--    first-main-layer-->
@@ -10,7 +25,7 @@
   <ng-template #treeNode let-node let-level="level">
 
     <div class="tree-node" >
-      <div class="node-row" (click)="node.type === 'folder' && toggleFolder(node)">
+      <div class="node-row" (click)="node.type === 'folder' ? toggleFolder(node) : onClickFile(node)">
           <span class="icon">
             @if (node.type === 'folder') {
               <img src="/assets/images/folder-icon.svg" alt="folder" *ngIf="node.expanded === false" width="16px">
@@ -20,7 +35,7 @@
               <img src="/assets/images/document.svg" alt="document" *ngIf="node.type ==='document' " width="13px">
             }
           </span>
-        <span class="node-name">{{ node.name }}</span>
+        <span class="node-name">{{ node.title }}</span>
       </div>
 
       <!-- next layer -->

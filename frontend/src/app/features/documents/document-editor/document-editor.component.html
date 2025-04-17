@@ -1,6 +1,9 @@
 <div class="document-editor-component">
+@if (rendering) {
   <header class="document-editor-component__header">
-    <h1 class="open-document-name poppins-400">Hello World</h1>
+    <input class="open-document-name" type="text" [(ngModel)]="this.document.title"
+    (blur)="renameDocument(document.title)">
+
     <p>
       <span class="document-info">
         <img src="/assets/images/folder-icon.svg">
@@ -19,12 +22,16 @@
     </div>
   </header>
 
-   <article>
-     <textarea cols="120" rows="20" id="text" autofocus ></textarea>
-   </article>
-  <!--   <form>-->
-  <!--&lt;!&ndash;      <textarea class="text" type="text" id="text" rows="6" placeholder="Try it!">&ndash;&gt;-->
-  <!--&lt;!&ndash;      </textarea>&ndash;&gt;-->
-  <!--     <button>Save</button>-->
-  <!--   </form>-->
+  <article>
+   <textarea cols="120" rows="20" id="text" autofocus ></textarea>
+  </article>
+
+<!--  <section>-->
+<!--    <button class="btn-save">-->
+<!--      Save-->
+<!--    </button>-->
+<!--  </section>-->
+} @else {
+  <p class="blank-title">Create new note or select existing one!</p>
+}
 </div>
