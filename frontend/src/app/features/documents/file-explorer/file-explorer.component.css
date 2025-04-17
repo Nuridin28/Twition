@@ -105,3 +105,10 @@ header {
   line-height: 100%;
   color: var(--light-color);
 }
+
+.folder-rename-input {
+  border: none;
+  border-bottom: 1px solid var(--light-color);
+  outline: none;
+  background: none;
+}

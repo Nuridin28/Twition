@@ -8,11 +8,11 @@ import {AppFile} from '../../core/interfaces/file';
 })
 export class DocumentService {
 
-  private selectedDocumentSource: BehaviorSubject<any> = new BehaviorSubject(null);
+  private selectedDocumentSource: BehaviorSubject<AppFile | null> =  new BehaviorSubject<AppFile | null>(null);
   selectedDocument = this.selectedDocumentSource.asObservable();
 
-  selectDocument(document: AppFile) {
-    this.selectedDocumentSource.next(document);
+  selectDocument(file: AppFile) {
+    this.selectedDocumentSource.next(file);
   }
 
 }

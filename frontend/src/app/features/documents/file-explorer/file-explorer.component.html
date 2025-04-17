@@ -25,8 +25,8 @@
   <ng-template #treeNode let-node let-level="level">
 
     <div class="tree-node" >
-      <div class="node-row" (click)="node.type === 'folder' ? toggleFolder(node) : onClickFile(node)">
-          <span class="icon">
+      <div class="node-row">
+          <span class="icon" (click)="node.type === 'folder' ? toggleFolder(node) : onClickFile(node)">
             @if (node.type === 'folder') {
               <img src="/assets/images/folder-icon.svg" alt="folder" *ngIf="node.expanded === false" width="16px">
               <img src="/assets/images/active-folder-icon.svg" alt="active-folder" *ngIf="node.expanded === true" width="16px">
@@ -35,7 +35,16 @@
               <img src="/assets/images/document.svg" alt="document" *ngIf="node.type ==='document' " width="13px">
             }
           </span>
-        <span class="node-name">{{ node.title }}</span>
+
+        <input *ngIf="editingFolderId === node.id && node.type === 'folder'"
+               [(ngModel)]="node.title"
+               (blur)="finishRenaming()"
+               (keydown.enter)="finishRenaming()"
+               autofocus
+               type="text"
+               class="folder-rename-input node-name"/>
+
+        <span *ngIf="editingFolderId !== node.id || node.type=='document'" (dblclick)="node.type === 'folder' ? startRenaming(node): null" class="node-name">{{ node.title }}</span>
       </div>
 
       <!-- next layer -->

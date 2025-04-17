@@ -7,23 +7,23 @@
     <p>
       <span class="document-info">
         <img src="/assets/images/folder-icon.svg">
-        Document location
+        {{ this.document.folder ? this.document.folder.title : 'Root folder'}}
       </span>
       <span class="document-info">
         <img src="/assets/images/clock-icon.svg">
-        Last time edited
+        {{ formatedCreationDate }}
       </span>
     </p>
     <hr>
     <div class="document-tags">
-        <span>#Tag</span>
-        <span>#Tag</span>
-        <span>#Tag</span>
+<!--        <span>#Tag</span>-->
+<!--        <span>#Tag</span>-->
+<!--        <span>#Tag</span>-->
     </div>
   </header>
 
   <article>
-   <textarea cols="120" rows="20" id="text" autofocus ></textarea>
+   <textarea cols="120" rows="20" id="text" autofocus [formControl]="contentControl"></textarea>
   </article>
 
 <!--  <section>-->
