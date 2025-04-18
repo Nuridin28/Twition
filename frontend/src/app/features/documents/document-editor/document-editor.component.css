@@ -1,0 +1,49 @@
+.document-editor-component {
+  margin-top: 80px;
+  margin-left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.document-editor-component__header {
+  width: 500px;
+
+}
+
+.document-editor-component__header .open-document-name {
+  font-weight: 400;
+  font-size: 50px;
+}
+
+.document-editor-component__header p {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.document-editor-component__header p .document-info {
+  margin-right: 20px;
+}
+
+.document-editor-component__header hr {
+  margin: 16px;
+  margin-left: 0px;
+  border: 1px solid var(--interface-color);
+}
+
+.document-editor-component__header .document-tags {
+  display: flex;
+  flex-direction: row;
+  /*align-items: center;*/
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--tags-color);
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+}
+
+.document-editor-component .text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+}

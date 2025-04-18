@@ -7,10 +7,11 @@
   --interface-color: #272727;
   --search-bar-color: #333333;
   --blue-color: #3471FF;
+  --light-blue-color: #2760ff;
   --filtro-color: #484848;
   --categories-color: #868686;
   --tags-color: #898989;
-  --background-black : #272727
+  --background-black : #1B1B1B;
 }
 
 * {
@@ -59,9 +60,15 @@ a {
 
 body {
   color: var(--light-color);
-  background: var(--background-black);
+  background-color: var(--background-black);
 }
 
+@font-face {
+  font-family: 'Poppins';
+  src: url('../public/assets/fonts/Poppins/Poppins-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
 
 @font-face {
   font-family: 'Poppins';
@@ -92,3 +99,6 @@ body {
   font-style: normal;
 }
 
+
+/*html, body { height: 100%; }*/
+/*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
