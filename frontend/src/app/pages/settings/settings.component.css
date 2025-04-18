@@ -1,0 +1,349 @@
+/* Page background and layout */
+:host {
+  display: block;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 2rem;
+  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Optional: style other UI parts */
+h2 {
+  color: var(--text-color);
+}
+
+label {
+  font-weight: bold;
+}
+
+select {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.settings-page {
+  display: flex;
+  justify-content: center;
+  align-items:baseline;
+  padding: 64px 32px;
+  height: 100%;
+  width: 100%;
+  margin-top: 150px;
+  background-color: var(--bg-color);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  min-width: 350px;
+}
+
+.profile-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+/* Back Button */
+.go-back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Main content layout */
+.settings-content {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  max-width: 1500px; /* more realistic than 5000px */
+  width: 100%;
+  align-items: flex-start;
+  margin-top: 80px; /* reduce top margin */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sidebar styles */
+.settings-sidebar {
+  flex-direction: column;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  transition: background-color 0.3s, color 0.3s;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 100px;
+  width: 280px;
+  min-height: 35vh;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Sidebar buttons */
+.settings-sidebar button {
+  /* background: transparent; */
+  color: var(--sidebar-text);
+  padding: 25px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 18px;
+  width: 90%;
+
+  background: none;
+}
+
+body.theme-light .settings-sidebar button:hover {
+  background-color: var(--hover-bg);
+  color: var(--hover-text);
+}
+
+/* Dark Theme Specific Hover (unchanged) */
+body.theme-dark .settings-sidebar button:hover {
+  background-color: var(--hover-bg);
+  color: var(--hover-text);
+}
+
+/* Active State (same for both themes) */
+.settings-sidebar button.active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.settings-sidebar button:hover {
+  background-color: var(--hover-bg);
+  color: var(--hover-text);
+}
+
+/* Section content */
+.profile-card {
+  background-color: var(--card-bg);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: auto;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-card h2 {
+  font-size: 30px;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  position: relative;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.profile-card p {
+  color: var(--card-text);
+}
+
+/* Form elements */
+.input-box {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
+
+.input-box:focus {
+  outline: 2px solid var(--accent-color);
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: var(--sidebar-text);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+/* Password input wrapper */
+.password-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Eye icon for password visibility */
+.eye-btn {
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.eye-btn:hover {
+  color: var(--accent-color);
+}
+
+/* General buttons */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 16px;
+}
+
+/* Edit button */
+.btn.edit {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.btn.edit:hover {
+  background-color: var(--light-blue-color);
+}
+
+.btn.edit.go-profile{
+  background-color: var(--accent-color);
+  color: white;
+  margin-top: 32px;
+}
+
+body.theme-light .btn.edit.go-profile {
+  background-color: var(--accent-color);
+  color: white;
+  margin-top: 32px;
+}
+
+.btn.edit.go-profile:hover {
+  background-color: var(--light-blue-color);
+}
+
+/* Save button */
+.btn.save {
+  background-color: var(--accent-color);
+  color: white;
+  margin-top: 8px;
+}
+
+.btn.save:hover {
+  background-color: #2563eb;
+}
+
+.btn.save.lang {
+  background-color: var(--accent-color);
+  color: white;
+  margin-top: 25px;
+}
+
+.btn.save.lang:hover {
+  background-color: #2563eb;
+}
+
+.password-warning {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+  padding-left: 4px;
+}
+
+/* Appearance buttons */
+.appearance-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.mode-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 16px;
+  width: 48%;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
+
+.mode-btn.active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* Button group layout */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Contact buttons inside anchor tags */
+.button-group a.btn {
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+  .settings-content {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .settings-page {
+    margin: 0;
+  }
+
+  .settings-sidebar {
+    width: 100%;
+    position: relative;
+    top: unset;
+  }
+}

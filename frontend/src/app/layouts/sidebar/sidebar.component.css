@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 16px;
   background-color: var(--interface-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   height: 100%; /* Ensure the container takes the full height */
   position: relative; /* Make sure positioning works relative to this container */
 }
@@ -29,7 +30,7 @@
   width: 227px;
   height: 40px;
   background-color: var(--search-bar-color);
-  color: var(--light-color);
+  color: var(--search-color);
   border: 1px solid var(--interface-color);
   border-radius: 7px;
 
@@ -77,7 +78,6 @@
 .form-search-filter .form-search-filter__header span {
   color: var(--filtro-color);
   line-height: 100%;
-
 }
 
 .form-search-filter .form-search-filter__label-tags-container {
@@ -85,7 +85,9 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-
+}
+.form-search-filter .form-search-filter__label-tags-container span {
+  margin-top: -50px;
 }
 
 .label-tag {
@@ -109,7 +111,7 @@
 }
 
 .label-tag__text {
-  /*position: relative;*/
+  position: relative;
   /*top: 0;*/
   /*left: 0;*/
   color: var(--blue-color);
@@ -223,6 +225,7 @@
   width: 40px;
   height: 40px;
   display: flex;
+  position: sticky;
   align-items: center;
   overflow: hidden;
   transition: width 0.4s ease;

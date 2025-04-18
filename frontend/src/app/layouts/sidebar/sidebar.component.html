@@ -20,7 +20,7 @@
 
       <header class="form-search-filter__header">
         <img src="/assets/images/filtro-icon.svg">
-        <span class="poppins-500">Filtro</span>
+        <span class="poppins-500">Filter</span>
       </header>
 
       <div class="form-search-filter__label-tags-container">
@@ -53,9 +53,10 @@
       <img src="/assets/icons/user-icon.svg" alt="User">
       <span class="btn-label">User Profile</span>
     </button>
-    <button class="sidebar-btn settings">
+    <button class="sidebar-btn settings" [routerLink]="['/settings']">
       <img src="/assets/icons/settings-icon.svg" alt="Settings">
       <span class="btn-label">Settings</span>
     </button>
   </section>
+
 </div>
