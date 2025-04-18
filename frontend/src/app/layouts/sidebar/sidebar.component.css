@@ -81,15 +81,21 @@
 
 .form-search-filter__label-tags-container {
   display: flex;
-  flex-wrap: wrap;       /* Wrap to next line if needed */
-  gap: 8px;             /* Add space between tags */
+  flex-direction: column;
+  gap: 12px; /* spacing between header and labels group */
 }
 
-.form-search-filter .form-search-filter__label-tags-container {
+.form-search-filter__header span {
+  margin-left:5px;
+  border: none;
+}
+
+.labels {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 6px; /* this controls the space between the labels */
 }
+
 .label-tag {
   position: relative;
   display: inline-flex; /* For centering */
@@ -104,7 +110,7 @@
 }
 
 
-.label-tag input {
+.labels .label-tag input {
   position: absolute;
   opacity: 0;
   width: 100%;
@@ -113,7 +119,7 @@
   margin: 0;
 }
 
-.label-tag__text {
+.labels .label-tag__text {
   color: var(--blue-color);
   font-family: 'Poppins', sans-serif;
   font-size: 11px;
@@ -121,11 +127,11 @@
   pointer-events: none; /* So the checkbox still registers the click */
 }
 
-.label-tag:has(input:checked) {
+.labels .label-tag:has(input:checked) {
   background-color: var(--blue-color);
 }
 
-.label-tag input:checked + span {
+.labels .label-tag input:checked + span {
   color: var(--interface-color);
 }
 
