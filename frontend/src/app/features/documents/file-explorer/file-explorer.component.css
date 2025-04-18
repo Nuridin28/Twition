@@ -1,3 +1,59 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-create-new-note {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.btn-create-new-note img {
+  width: 20px;
+  filter: invert(56%) sepia(0%) saturate(1535%) hue-rotate(268deg) brightness(94%) contrast(94%);
+}
+
+.btn-create-new-note img:hover {
+  filter: invert(100%) sepia(16%) saturate(7497%) hue-rotate(181deg) brightness(125%) contrast(91%);
+}
+
+.btn-create-new-folder {
+  border: none;
+  outline: none;
+  background: none;
+ }
+
+.btn-create-new-folder img {
+  width: 20px;
+  filter: invert(56%) sepia(0%) saturate(1535%) hue-rotate(268deg) brightness(94%) contrast(94%);
+}
+
+.btn-create-new-folder img:hover {
+  filter: invert(100%) sepia(16%) saturate(7497%) hue-rotate(181deg) brightness(125%) contrast(91%);
+}
+
+.categories__label {
+  /*color: var(--categories-color);*/
+  color: var(--categories-color);
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.hr {
+  border: 1px solid var(--categories-color);
+  width: 279px;
+
+  margin-bottom: 10px;
+}
+
 .tree-container {
   display: flex;
   flex-direction: column;
@@ -42,9 +98,17 @@
 }
 
 .node-name {
+  font-family: 'Nunito', sans-serif;
   margin-left: 6px;
   font-weight: 400;
   font-size: 13px;
   line-height: 100%;
   color: var(--light-color);
+}
+
+.folder-rename-input {
+  border: none;
+  border-bottom: 1px solid var(--light-color);
+  outline: none;
+  background: none;
 }

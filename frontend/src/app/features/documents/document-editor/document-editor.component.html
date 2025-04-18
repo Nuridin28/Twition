@@ -1,1 +1,37 @@
-<p>document-editor works!</p>
+<div class="document-editor-component">
+@if (rendering) {
+  <header class="document-editor-component__header">
+    <input class="open-document-name" type="text" [(ngModel)]="this.document.title"
+    (blur)="renameDocument(document.title)">
+
+    <p>
+      <span class="document-info">
+        <img src="/assets/images/folder-icon.svg">
+        {{ this.document.folder ? this.document.folder.title : 'Root folder'}}
+      </span>
+      <span class="document-info">
+        <img src="/assets/images/clock-icon.svg">
+        {{ formatedCreationDate }}
+      </span>
+    </p>
+    <hr>
+    <div class="document-tags">
+<!--        <span>#Tag</span>-->
+<!--        <span>#Tag</span>-->
+<!--        <span>#Tag</span>-->
+    </div>
+  </header>
+
+  <article>
+   <textarea cols="120" rows="20" id="text" autofocus [formControl]="contentControl"></textarea>
+  </article>
+
+<!--  <section>-->
+<!--    <button class="btn-save">-->
+<!--      Save-->
+<!--    </button>-->
+<!--  </section>-->
+} @else {
+  <p class="blank-title">Create new note or select existing one!</p>
+}
+</div>
