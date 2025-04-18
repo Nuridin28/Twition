@@ -11,6 +11,12 @@ interface User {
   token: string;
 }
 
+interface LoginResponse {
+  access: string;
+  refresh: string;
+  user: User;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +24,7 @@ export class AuthService {
   private currentUser: User | null = null;
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'user_data';
-  private apiUrl = 'https://api.example.com'; //api url for login and register
+  private apiUrl = 'http://127.0.0.1:8000/api/accounts'; //api url for login and register
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
@@ -35,20 +41,30 @@ export class AuthService {
     email: string,
     password: string,
     rememberMe: boolean
-  ): Observable<User> {
+  ): Observable<LoginResponse> {
     return this.http
-      .post<User>(`${this.apiUrl}/auth/login`, { email, password })
+      .post<LoginResponse>(`${this.apiUrl}/login/`, { email, password })
       .pipe(
         delay(1000),
-        tap((user) => {
+        tap((response) => {
+          const user = response.user;
+          const accessToken = response.access;
+          const refreshToken = response.refresh;
+
           this.currentUser = user;
+
           if (rememberMe) {
-            localStorage.setItem(this.TOKEN_KEY, user.token);
+            localStorage.setItem(this.TOKEN_KEY, accessToken);
+            localStorage.setItem('refresh_token', refreshToken);
             localStorage.setItem(this.USER_KEY, JSON.stringify(user));
           } else {
-            sessionStorage.setItem(this.TOKEN_KEY, user.token);
+            sessionStorage.setItem(this.TOKEN_KEY, accessToken);
+            sessionStorage.setItem('refresh_token', refreshToken);
             sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
           }
+
+          console.log('Access token saved:', accessToken);
+          console.log('Refresh token saved:', refreshToken);
         }),
         catchError((error) => {
           if (error.status === 401) {
@@ -68,7 +84,7 @@ export class AuthService {
     password: string
   ): Observable<any> {
     return this.http
-      .post<any>(`${this.apiUrl}/auth/register`, {
+      .post<any>(`${this.apiUrl}/register/`, {
         firstName,
         lastName,
         email,
@@ -96,7 +112,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return !!this.currentUser;
+    return !!this.getToken();
   }
 
   public getCurrentUser(): User | null {
@@ -104,6 +120,10 @@ export class AuthService {
   }
 
   public getToken(): string | null {
+    const token =
+      localStorage.getItem(this.TOKEN_KEY) ||
+      sessionStorage.getItem(this.TOKEN_KEY);
+    console.log('Retrieved token:', token);
     return (
       localStorage.getItem(this.TOKEN_KEY) ||
       sessionStorage.getItem(this.TOKEN_KEY)
