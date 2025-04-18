@@ -18,7 +18,7 @@ export class AuthService {
   private currentUser: User | null = null;
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'user_data';
-  private apiUrl = 'https://api.example.com'; //api url for login and register
+  private apiUrl = 'http://127.0.0.1:8000/api/accounts'; //api url for login and register
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
@@ -37,7 +37,7 @@ export class AuthService {
     rememberMe: boolean
   ): Observable<User> {
     return this.http
-      .post<User>(`${this.apiUrl}/auth/login`, { email, password })
+      .post<User>(`${this.apiUrl}/login/`, { email, password })
       .pipe(
         delay(1000),
         tap((user) => {
@@ -68,7 +68,7 @@ export class AuthService {
     password: string
   ): Observable<any> {
     return this.http
-      .post<any>(`${this.apiUrl}/auth/register`, {
+      .post<any>(`${this.apiUrl}/register/`, {
         firstName,
         lastName,
         email,
