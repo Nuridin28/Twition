@@ -59,5 +59,52 @@
     "LIGHT": "Light",
     "DARK": "Dark",
     "DEVICE": "Device"
-  }
+  },
+
+  "SETTINGS": {
+    "BACK": "Go Back",
+    "ACCOUNT": "Account",
+    "CHANGE_PASSWORD": "Change Password",
+    "APPEARANCE": "Appearance",
+    "LANGUAGE": "Language",
+    "CONTACT": "Contact",
+    "ACCOUNT_INFO": "Manage your account information.",
+    "GO_TO_PROFILE": "Go to Profile",
+    "OLD_PASSWORD": "Old Password",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "SAVE_PASSWORD": "Save Password",
+    "PLACEHOLDER": {
+      "OLD_PASSWORD": "Enter old password",
+      "NEW_PASSWORD": "New password",
+      "CONFIRM_PASSWORD": "Confirm password"
+    },
+    "DARK_MODE": "Dark Mode",
+    "LIGHT_MODE": "Light Mode",
+    "CONTACT_INFO": "If you have questions or feedback, feel free to reach out:",
+    "CONTACT_EMAIL": "Email",
+    "CONTACT_LINKEDIN": "LinkedIn",
+    "PASSWORD_WARNING": {
+      "LENGTH": "Password must be at least 8 characters long.",
+      "UPPERCASE": "Password must include at least one uppercase letter.",
+      "LOWERCASE": "Password must include at least one lowercase letter.",
+      "NUMBER": "Password must include at least one number.",
+      "SPECIAL": "Password must include at least one special character.",
+      "MISMATCH": "Passwords do not match."
+      }
+  },
+  "PROFILE": {
+    "GO_BACK": "Go Back",
+    "UPLOAD_AVATAR": "Upload Avatar",
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "EDIT": "Edit",
+    "LOGOUT": "Logout",
+    "SAVE": "Save",
+    "INVALID_EMAIL": "Please enter a valid email"
+  },
+  "Search": "Search",
+  "File explorer": "File explorer",
+  "User Profile": "User Profile",
+  "Settings": "Settings"
 }

@@ -3,125 +3,135 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ThemeService } from '../../core/services/theme.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, TranslateModule],
 })
 export class SettingsComponent implements OnInit {
-  // Theme switching
+  // Theme
   selectedTheme: 'dark' | 'light' = 'dark';
   darkMode = true;
 
-  // Section switching
+  // Sidebar section
   selectedSection = 'account';
 
-  // Password logic
+  // Password fields
   showPassword = false;
   showConfirmPassword = false;
   showOldPassword = false;
-  newPassword: string = '';
-  confirmPassword: string = '';
-  oldPassword: string = '';
-  passwordStrengthWarning: string = '';
-  confirmPasswordWarning: string = '';
+  newPassword = '';
+  confirmPassword = '';
+  oldPassword = '';
+  passwordStrengthWarning = '';
+  confirmPasswordWarning = '';
 
-  // Language selection
+  // Language
   selectedLanguage = 'en';
   languages = [
     { code: 'en', label: 'English' },
-    { code: 'kz', label: 'Kazakh' },
+    { code: 'kk', label: 'Kazakh' },
     { code: 'ru', label: 'Russian' },
   ];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(
+    public themeService: ThemeService,
+    public translateService: TranslateService
+  ) {}
 
-  ngOnInit() {
-    // Get saved theme on component load
+  ngOnInit(): void {
     const savedTheme = (localStorage.getItem('theme') as 'dark' | 'light') || 'dark';
     this.setTheme(savedTheme);
+
+    const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+    this.selectedLanguage = savedLang;
+    this.translateService.use(savedLang);
   }
 
-  // Section switch method
-  selectSection(section: string) {
+  // Section switcher
+  
+  selectSection(section: string): void {
     this.selectedSection = section;
   }
+  
 
-  // Toggle password visibility
-  togglePasswordVisibility() {
+  // Language switching
+  switchLanguage(language: string): void {
+    this.selectedLanguage = language;
+    this.translateService.use(language);
+    localStorage.setItem('preferredLanguage', language);
+  }
+
+  // Theme switching
+  setTheme(theme: 'dark' | 'light'): void {
+    this.selectedTheme = theme;
+    document.body.classList.remove('theme-dark', 'theme-light');
+    document.body.classList.add(`theme-${theme}`);
+    localStorage.setItem('theme', theme);
+  }
+
+  // Password visibility toggles
+  togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
-  // Toggle confirm password visibility
-  toggleConfirmVisibility() {
+  toggleConfirmVisibility(): void {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-  // Toggle old password visibility
-  toggleOldVisibility() {
+  toggleOldVisibility(): void {
     this.showOldPassword = !this.showOldPassword;
   }
 
-  // Check password strength
-  checkPasswordStrength() {
-    const password = this.newPassword;
-    if (password.length < 8) {
-      this.passwordStrengthWarning = 'Password should be at least 8 characters long';
-    } else if (!/[A-Z]/.test(password)) {
-      this.passwordStrengthWarning = 'Password should contain at least one uppercase letter';
-    } else if (!/\d/.test(password)) {
-      this.passwordStrengthWarning = 'Password should contain at least one number';
+  // Password strength checker
+  checkPasswordStrength(): void {
+    const pw = this.newPassword;
+
+    if (!pw) {
+      this.passwordStrengthWarning = '';
+      return;
+    }
+
+    if (pw.length < 8) {
+      this.passwordStrengthWarning = 'SETTINGS.PASSWORD_WARNING.LENGTH';
+    } else if (!/[A-Z]/.test(pw)) {
+      this.passwordStrengthWarning = 'SETTINGS.PASSWORD_WARNING.UPPERCASE';
+    } else if (!/[a-z]/.test(pw)) {
+      this.passwordStrengthWarning = 'SETTINGS.PASSWORD_WARNING.LOWERCASE';
+    } else if (!/[0-9]/.test(pw)) {
+      this.passwordStrengthWarning = 'SETTINGS.PASSWORD_WARNING.NUMBER';
+    } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pw)) {
+      this.passwordStrengthWarning = 'SETTINGS.PASSWORD_WARNING.SPECIAL';
     } else {
       this.passwordStrengthWarning = '';
     }
   }
 
-  // Check if the confirm password matches the new password
-  checkConfirmPassword() {
-    if (this.confirmPassword && this.confirmPassword !== this.newPassword) {
-      this.confirmPasswordWarning = 'Passwords do not match!';
+  // Confirm password match checker
+  checkConfirmPassword(): void {
+    if (this.newPassword && this.confirmPassword && this.newPassword !== this.confirmPassword) {
+      this.confirmPasswordWarning = 'SETTINGS.PASSWORD_WARNING.MISMATCH';
     } else {
       this.confirmPasswordWarning = '';
     }
   }
-
-  // Save new password
-  savePassword() {
-    if (this.newPassword === this.confirmPassword) {
-      console.log('Password updated.');
-    } else {
+  // Save password logic
+  savePassword(): void {
+    if (this.newPassword !== this.confirmPassword) {
       console.error('Passwords do not match!');
+      this.confirmPasswordWarning = 'Passwords do not match!';
+      return;
     }
-  }
 
-  // Set dark mode theme
-  setDarkMode() {
-    this.darkMode = true;
-    this.setTheme('dark');
-  }
-
-  // Set light mode theme
-  setLightMode() {
-    this.darkMode = false;
-    this.setTheme('light');
-  }
-
-  // Set theme and store it in localStorage
-  setTheme(theme: 'dark' | 'light') {
-    this.selectedTheme = theme;
-    const body = document.body;
-
-    body.classList.remove('theme-dark', 'theme-light');
-    body.classList.add(`theme-${theme}`);
-
-    localStorage.setItem('theme', theme);
-  }
-
-  // Save selected language
-  saveLanguage() {
-    console.log('Selected language:', this.selectedLanguage);
+    // Add backend integration here later
+    console.log('Password updated.');
+    alert('Password changed successfully!');
+    this.newPassword = '';
+    this.confirmPassword = '';
+    this.oldPassword = '';
   }
 }

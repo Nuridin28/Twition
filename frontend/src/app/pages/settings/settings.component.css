@@ -8,6 +8,10 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
+* {
+  transition: background-color 0.3s, color 0.3s;
+}
+
 /* Optional: style other UI parts */
 h2 {
   color: var(--text-color);
@@ -32,7 +36,7 @@ select {
   padding: 64px 32px;
   height: 100%;
   width: 100%;
-  margin-top: 150px;
+  margin-top: 135px;
   background-color: var(--bg-color);
   color: white;
   font-family: 'Segoe UI', sans-serif;
@@ -283,7 +287,7 @@ body.theme-light .btn.edit.go-profile {
 .password-warning {
   color: red;
   font-size: 14px;
-  margin: 10px 0 0 0;
+  margin: 7px 0 0 0;
   padding-left: 4px;
 }
 
@@ -335,6 +339,7 @@ body.theme-light .btn.edit.go-profile {
     align-items: stretch;
     margin-left: 16px;
     margin-right: 16px;
+    margin-top: -20px;
   }
 
   .settings-page {

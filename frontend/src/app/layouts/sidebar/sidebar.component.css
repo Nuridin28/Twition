@@ -1,4 +1,4 @@
-:host {
+.sidebar {
   padding-left: 15px;
   padding-right: 15px;
   border: 1px solid var(--interface-color);
@@ -7,8 +7,7 @@
   gap: 16px;
   background-color: var(--interface-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  height: 100%; /* Ensure the container takes the full height */
-  position: relative; /* Make sure positioning works relative to this container */
+  min-height: 100vh;
 }
 
 .form-search {
@@ -80,19 +79,22 @@
   line-height: 100%;
 }
 
-.form-search-filter .form-search-filter__label-tags-container {
+.form-search-filter__label-tags-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.form-search-filter .form-search-filter__label-tags-container span {
-  margin-top: -50px;
+  flex-wrap: wrap;       /* Wrap to next line if needed */
+  gap: 8px;             /* Add space between tags */
 }
 
+.form-search-filter .form-search-filter__label-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 .label-tag {
   position: relative;
-  display: inline-block;
+  display: inline-flex; /* For centering */
+  align-items: center;
+  justify-content: center;
   height: 21px;
   background-color: var(--interface-color);
   border: 1px solid var(--blue-color);
@@ -100,6 +102,7 @@
   padding-left: 7px;
   padding-right: 7px;
 }
+
 
 .label-tag input {
   position: absolute;
@@ -111,28 +114,14 @@
 }
 
 .label-tag__text {
-  position: relative;
-  /*top: 0;*/
-  /*left: 0;*/
   color: var(--blue-color);
-
-  line-height: 17px;
-
   font-family: 'Poppins', sans-serif;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0;
-
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  pointer-events: none; /* So the checkbox still registers the click */
 }
 
 .label-tag:has(input:checked) {
-  /*position: relative;*/
-  /*top: 0;*/
-  /*left: 0;*/
   background-color: var(--blue-color);
 }
 
@@ -206,41 +195,38 @@
 }
 
 .sidebar-buttons {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  z-index: 1000;
+  margin-top: auto;
+  padding-bottom: 20px;
 }
 
 /* Button style */
 .sidebar-btn {
   position: relative;
+  display: inline-flex;
   background-color: #2a75f3;
   color: white;
   border: none;
   border-radius: 8px;
   width: 40px;
   height: 40px;
-  display: flex;
-  position: sticky;
   align-items: center;
   overflow: hidden;
   transition: width 0.4s ease;
   padding-left: 8px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.sidebar-btn.user:hover{
-  width: 140px;
+.sidebar-btn.user:hover {
+  width: 100%;
 }
 
-.sidebar-btn.settings:hover{
-  width: 120px;
+.sidebar-btn.settings:hover {
+  width: 100%;
 }
-
 /* Icon style */
 .sidebar-btn img {
   width: 20px;
@@ -253,12 +239,20 @@
 /* Label style */
 .btn-label {
   opacity: 0;
-  white-space: nowrap;
   font-size: 13px;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   transition: opacity 0.3s ease;
-  align-items: center;
+
+  display: flex;
+  align-items: center;    
+  justify-content: center; 
+
+  height: 100%;           
+  width: 70%;           
+
+  text-align: center;     
+  position: relative;
 }
 
 .sidebar-btn:hover .btn-label {

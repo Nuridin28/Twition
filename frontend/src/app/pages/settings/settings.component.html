@@ -1,40 +1,35 @@
 <!-- settings.component.html -->
 <div class="settings-page">
   <!-- Go Back Button -->
-  <button class="go-back-btn" [routerLink]="['/dashboard']">← Go Back</button>
+  <button class="go-back-btn" [routerLink]="['/dashboard']">← {{ 'SETTINGS.BACK' | translate }}</button>
 
   <!-- Main Content -->
   <div class="settings-content">
     <!-- Sidebar -->
     <div class="settings-sidebar">
-      <button [class.active]="selectedSection === 'account'" (click)="selectSection('account')">Account</button>
-      <button [class.active]="selectedSection === 'password'" (click)="selectSection('password')">Change Password</button>
-      <button [class.active]="selectedSection === 'appearance'" (click)="selectSection('appearance')">Appearance</button>
-      <button [class.active]="selectedSection === 'language'" (click)="selectSection('language')">Language</button>
-      <button [class.active]="selectedSection === 'contact'" (click)="selectSection('contact')">Contact</button>
+      <button [class.active]="selectedSection === 'account'" (click)="selectSection('account')">{{ 'SETTINGS.ACCOUNT' | translate }}</button>
+      <button [class.active]="selectedSection === 'password'" (click)="selectSection('password')">{{ 'SETTINGS.CHANGE_PASSWORD' | translate }}</button>
+      <button [class.active]="selectedSection === 'appearance'" (click)="selectSection('appearance')">{{ 'SETTINGS.APPEARANCE' | translate }}</button>
+      <button [class.active]="selectedSection === 'language'" (click)="selectSection('language')">{{ 'SETTINGS.LANGUAGE' | translate }}</button>
+      <button [class.active]="selectedSection === 'contact'" (click)="selectSection('contact')">{{ 'SETTINGS.CONTACT' | translate }}</button>
     </div>
 
     <div class="profile-wrapper">
       <!-- Account Section -->
       <div *ngIf="selectedSection === 'account'" class="profile-card">
-        <h2>Account</h2>
-        <p>Manage your account information.</p>
-        <button class="btn edit go-profile" [routerLink]="['/profile']">Go to Profile</button>
+        <h2>{{ 'SETTINGS.ACCOUNT' | translate }}</h2>
+        <p>{{ 'SETTINGS.ACCOUNT_INFO' | translate }}</p>
+        <button class="btn edit go-profile" [routerLink]="['/profile']">{{ 'SETTINGS.GO_TO_PROFILE' | translate }}</button>
       </div>
 
       <!-- Password Section -->
       <div *ngIf="selectedSection === 'password'" class="profile-card">
-        <h2>Change Password</h2>
+        <h2>{{ 'SETTINGS.CHANGE_PASSWORD' | translate }}</h2>
 
         <div class="form-group">
-          <label>Old Password</label>
+          <label>{{ 'SETTINGS.OLD_PASSWORD' | translate }}</label>
           <div class="password-field">
-            <input
-              [type]="showOldPassword ? 'text' : 'password'"
-              class="input-box"
-              [(ngModel)]="oldPassword"
-              placeholder="Enter old password"
-            />
+            <input [type]="showOldPassword ? 'text' : 'password'" class="input-box" [(ngModel)]="oldPassword" [placeholder]="'SETTINGS.PLACEHOLDER.OLD_PASSWORD' | translate" />
             <button type="button" (click)="toggleOldVisibility()" class="eye-btn">
               <i class="fa" [ngClass]="showOldPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
             </button>
@@ -42,83 +37,58 @@
         </div>
 
         <div class="form-group">
-          <label>New Password</label>
+          <label>{{ 'SETTINGS.NEW_PASSWORD' | translate }}</label>
           <div class="password-field">
-            <input
-            [type]="showPassword ? 'text' : 'password'"
-            class="input-box"
-            [(ngModel)]="newPassword"
-            placeholder="New password"
-            (input)="checkPasswordStrength()"
-          />
+            <input [type]="showPassword ? 'text' : 'password'" class="input-box" [(ngModel)]="newPassword" [placeholder]="'SETTINGS.PLACEHOLDER.NEW_PASSWORD' | translate" (input)="checkPasswordStrength()" />
             <button type="button" (click)="togglePasswordVisibility()" class="eye-btn">
               <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
             </button>
           </div>
           <div *ngIf="passwordStrengthWarning" class="password-warning">
-            {{ passwordStrengthWarning }}
+            {{ passwordStrengthWarning | translate }}
           </div>
         </div>
 
         <div class="form-group">
-          <label>Confirm Password</label>
+          <label>{{ 'SETTINGS.CONFIRM_PASSWORD' | translate }}</label>
           <div class="password-field">
-            <input
-              [type]="showConfirmPassword ? 'text' : 'password'"
-              class="input-box"
-              [(ngModel)]="confirmPassword"
-              placeholder="Confirm password"
-              (input)="checkConfirmPassword()"
-            />
+            <input [type]="showConfirmPassword ? 'text' : 'password'" class="input-box" [(ngModel)]="confirmPassword" [placeholder]="'SETTINGS.PLACEHOLDER.CONFIRM_PASSWORD' | translate" (input)="checkConfirmPassword()" />
             <button type="button" (click)="toggleConfirmVisibility()" class="eye-btn">
               <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
             </button>
           </div>
           <div *ngIf="confirmPasswordWarning" class="password-warning">
-            {{ confirmPasswordWarning }}
+            {{ confirmPasswordWarning | translate }}
           </div>
         </div>
 
-        <button class="btn save" (click)="savePassword()">Save Password</button>
+        <button class="btn save" (click)="savePassword()">{{ 'SETTINGS.SAVE_PASSWORD' | translate }}</button>
       </div>
 
       <!-- Appearance Section -->
       <div *ngIf="selectedSection === 'appearance'" class="profile-card">
-        <h2>Appearance</h2>
+        <h2>{{ 'SETTINGS.APPEARANCE' | translate }}</h2>
         <div class="appearance-buttons">
-          <button
-            (click)="setTheme('dark')"
-            [class.active]="selectedTheme === 'dark'"
-            class="mode-btn"
-          >
-            🌙 Dark Mode
-          </button>
-          <button
-            (click)="setTheme('light')"
-            [class.active]="selectedTheme === 'light'"
-            class="mode-btn"
-          >
-            ☀️ Light Mode
-          </button>
+          <button (click)="setTheme('dark')" [class.active]="selectedTheme === 'dark'" class="mode-btn">🌙 {{ 'SETTINGS.DARK_MODE' | translate }}</button>
+          <button (click)="setTheme('light')" [class.active]="selectedTheme === 'light'" class="mode-btn">☀️ {{ 'SETTINGS.LIGHT_MODE' | translate }}</button>
         </div>
       </div>
 
       <!-- Language Section -->
       <div *ngIf="selectedSection === 'language'" class="profile-card">
-        <h2>Language</h2>
-        <select class="input-box" [(ngModel)]="selectedLanguage">
+        <h2>{{ 'SETTINGS.LANGUAGE' | translate }}</h2>
+        <select class="input-box" [(ngModel)]="selectedLanguage" (ngModelChange)="switchLanguage($event)">
           <option *ngFor="let lang of languages" [value]="lang.code">{{ lang.label }}</option>
         </select>
-        <button class="btn save lang" (click)="saveLanguage()">Save Language</button>
       </div>
 
       <!-- Contact Section -->
       <div *ngIf="selectedSection === 'contact'" class="profile-card">
-        <h2>Contact Us</h2>
-        <p>If you have questions or feedback, feel free to reach out:</p>
+        <h2>{{ 'SETTINGS.CONTACT' | translate }}</h2>
+        <p>{{ 'SETTINGS.CONTACT_INFO' | translate }}</p>
         <div class="button-group">
-          <a href="mailto:support@example.com" class="btn edit">Email</a>
-          <a href="https://linkedin.com/in/yourname" target="_blank" class="btn edit">LinkedIn</a>
+          <a href="mailto:support@example.com" class="btn edit">{{ 'SETTINGS.CONTACT_EMAIL' | translate }}</a>
+          <a href="https://linkedin.com/in/yourname" target="_blank" class="btn edit">{{ 'SETTINGS.CONTACT_LINKEDIN' | translate }}</a>
         </div>
       </div>
     </div>
