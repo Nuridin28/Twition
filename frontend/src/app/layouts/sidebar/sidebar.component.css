@@ -104,6 +104,9 @@
   display: inline-flex; /* For centering */
   align-items: center;
   justify-content: center;
+  border: 2px solid var(--blue-color);
+  border-radius: 20px;
+  padding: 2px;
 }
 
 
