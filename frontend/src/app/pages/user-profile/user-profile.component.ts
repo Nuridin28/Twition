@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '../../core/services/user.service';  
 import { AuthService } from '../../core/services/auth.service'; 
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,7 +30,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private location: Location, 
     private userService: UserService,  
-    private authService: AuthService  
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -106,7 +108,7 @@ export class UserProfileComponent implements OnInit {
 
   logout() {
     this.authService.logout();  
-    console.log('User logged out');
+    this.router.navigate(['/auth/login']);
   }
 
   validateEmail(email: string): boolean {
