@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Location } from '@angular/common'; 
+import { Location } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserService } from '../../core/services/user.service';  // Import the UserService for backend interactions
-import { AuthService } from '../../core/services/auth.service'; // Import AuthService for logout
+import { UserService } from '../../core/services/user.service';  
+import { AuthService } from '../../core/services/auth.service'; 
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,43 +16,33 @@ import { Observable } from 'rxjs';
   imports: [CommonModule, FormsModule, RouterModule, TranslateModule],
 })
 export class UserProfileComponent implements OnInit {
-  // Default avatar (since there's no upload avatar option during registration)
   defaultAvatar = '/assets/images/default.jpg';
-  
-  // Flag to toggle between view and edit modes
   isEditing = false;
-  
-  // Placeholder for user data fetched from backend
   user: any = {
     name: '',
     email: '',
     avatar: this.defaultAvatar
   };
-
-  // Copy of user object to edit
   editedUser: any = { ...this.user };
-
-  // Email validation flag (valid or invalid)
   isEmailValid = true;
 
   constructor(
     private location: Location, 
-    private userService: UserService,  // Inject UserService
-    private authService: AuthService  // Inject AuthService for logout functionality
+    private userService: UserService,  
+    private authService: AuthService  
   ) {}
 
   ngOnInit() {
-    this.loadUserData();  // Load user data when the component is initialized
+    this.loadUserData();
   }
 
-  // Fetch user data after login/registration
   loadUserData() {
-    const currentUser = this.authService.getCurrentUser(); // Get the current user object
+    const currentUser = this.authService.getCurrentUser(); 
     if (currentUser && currentUser.id) {
-      this.userService.getUserProfile(currentUser.id).subscribe(
+      this.userService.getUserProfile().subscribe(
         (response) => {
           this.user = response;
-          this.editedUser = { ...this.user }; // Initialize editedUser with fetched data
+          this.editedUser = { ...this.user };
         },
         (error) => {
           console.error('Error fetching user data:', error);
@@ -63,17 +53,14 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  // This enables the edit mode and resets the data with flags
   enableEdit() {
     this.isEditing = true;
-    this.editedUser = { ...this.user };
+    this.editedUser = { ...this.user };  
     this.isEmailValid = true;
   }
 
-  // Save the changes (if only email is good)
   saveChanges() {
     if (this.validateEmail(this.editedUser.email)) {
-      // Assuming an update to the backend here using UserService
       this.userService.updateUserProfile(this.editedUser).subscribe(
         (response) => {
           this.user = { ...this.editedUser };
@@ -88,32 +75,28 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  // Logout functionality (logout is not implemented yet)
   logout() {
-    this.authService.logout();  // Assuming a logout method exists in AuthService
+    this.authService.logout();  
     console.log('User logged out');
   }
 
-  // Validate email format using regex
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  // Avatar file changes and saves (reads the file as data URL, base64 image)
   onAvatarChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.editedUser.avatar = e.target.result; 
+        this.editedUser.avatar = e.target.result;
       };
       reader.readAsDataURL(file);
     }
   }
 
-  // Go back to the previous page
   goBack() {
-    this.location.back(); 
+    this.location.back();
   }
 }

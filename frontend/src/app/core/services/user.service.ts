@@ -6,17 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://http://127.0.0.1:8000/api/accounts';
+  private apiUrl = 'https://127.0.0.1:8000/api/accounts'; 
 
   constructor(private http: HttpClient) {}
 
-  // Get user profile data
   getUserProfile(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/user/profile`);
+    return this.http.get<any>(`${this.apiUrl}/me/`);
   }
 
-  // Update user profile data
   updateUserProfile(userData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/user/profile`, userData);
+    return this.http.put<any>(`${this.apiUrl}/me/`, userData);  
   }
 }
