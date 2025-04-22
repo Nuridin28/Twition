@@ -14,14 +14,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   imports: [FormsModule, CommonModule, RouterModule, TranslateModule],
 })
 export class SettingsComponent implements OnInit {
-  // Theme
+
   selectedTheme: 'dark' | 'light' = 'dark';
   darkMode = true;
 
-  // Sidebar section
+
   selectedSection = 'account';
 
-  // Password fields
+
   showPassword = false;
   showConfirmPassword = false;
   showOldPassword = false;
@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
   passwordStrengthWarning = '';
   confirmPasswordWarning = '';
 
-  // Language
+
   selectedLanguage = 'en';
   languages = [
     { code: 'en', label: 'English' },
@@ -54,21 +54,21 @@ export class SettingsComponent implements OnInit {
     this.translateService.use(savedLang);
   }
 
-  // Section switcher
+
   
   selectSection(section: string): void {
     this.selectedSection = section;
   }
   
 
-  // Language switching
+
   switchLanguage(language: string): void {
     this.selectedLanguage = language;
     this.translateService.use(language);
     localStorage.setItem('preferredLanguage', language);
   }
 
-  // Theme switching
+
   setTheme(theme: 'dark' | 'light'): void {
     this.selectedTheme = theme;
     document.body.classList.remove('theme-dark', 'theme-light');
@@ -76,7 +76,7 @@ export class SettingsComponent implements OnInit {
     localStorage.setItem('theme', theme);
   }
 
-  // Password visibility toggles
+
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
@@ -89,7 +89,7 @@ export class SettingsComponent implements OnInit {
     this.showOldPassword = !this.showOldPassword;
   }
 
-  // Password strength checker
+
   checkPasswordStrength(): void {
     const pw = this.newPassword;
 
@@ -113,7 +113,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  // Confirm password match checker
+
   checkConfirmPassword(): void {
     if (this.newPassword && this.confirmPassword && this.newPassword !== this.confirmPassword) {
       this.confirmPasswordWarning = 'SETTINGS.PASSWORD_WARNING.MISMATCH';
@@ -121,7 +121,7 @@ export class SettingsComponent implements OnInit {
       this.confirmPasswordWarning = '';
     }
   }
-  // Save password logic
+
   savePassword(): void {
     if (this.newPassword !== this.confirmPassword) {
       console.error('Passwords do not match!');
@@ -129,7 +129,6 @@ export class SettingsComponent implements OnInit {
       return;
     }
 
-    // Add backend integration here later
     console.log('Password updated.');
     alert('Password changed successfully!');
     this.newPassword = '';
