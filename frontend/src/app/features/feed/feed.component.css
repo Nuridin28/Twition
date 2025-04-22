@@ -1,0 +1,9 @@
+
+.container-1 {
+    display: grid;
+    grid-template-columns: 309px 1fr;
+    grid-template-rows: 100vh;
+  }
+  
+  
+  

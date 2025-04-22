@@ -7,6 +7,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { FeedComponent } from './features/feed/feed.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -30,6 +31,10 @@ export const routes: Routes = [
     path: 'welcome',
     component: WelcomeComponent,
   },
-
+  {
+    path: 'feed',
+    component: FeedComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: NotFoundComponent },
-  ]
+];
