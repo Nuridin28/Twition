@@ -7,10 +7,6 @@ import {AppFile} from '../../../core/interfaces/file';
 import {FormsModule} from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {User} from '../../../core/interfaces/user';
-<<<<<<< HEAD
-=======
-
->>>>>>> 8223bd182c44bbbb7af15dd45e473f961e63957b
 
 
 @Component({

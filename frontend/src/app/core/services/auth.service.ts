@@ -9,6 +9,7 @@ interface User {
   lastName: string;
   email: string;
   token: string;
+  avatar?: string;
 }
 
 interface LoginResponse {
@@ -32,11 +33,15 @@ export class AuthService {
   }
 
   private loadUserFromStorage(): void {
-    const userData = localStorage.getItem(this.USER_KEY);
+    const userData =
+      localStorage.getItem(this.USER_KEY) || sessionStorage.getItem(this.USER_KEY);
     if (userData) {
       this.currentUser = JSON.parse(userData);
     }
   }
+
+
+  
 
   public login(
     email: string,

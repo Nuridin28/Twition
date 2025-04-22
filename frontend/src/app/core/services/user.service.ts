@@ -5,16 +5,16 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class UserService {
-  private apiUrl = 'https://127.0.0.1:8000/api/accounts'; 
+    constructor(private http: HttpClient) {}
+  
+    getUserProfile(): Observable<any> {
+        return this.http.get('http://127.0.0.1:8000/api/accounts/me/');
+    }
 
-  constructor(private http: HttpClient) {}
-
-  getUserProfile(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/me/`);
+    updateUserProfile(data: any): Observable<any> {
+        return this.http.patch('http://127.0.0.1:8000/api/accounts/me/', data);
+      }
   }
-
-  updateUserProfile(userData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/me/`, userData);  
-  }
-}
