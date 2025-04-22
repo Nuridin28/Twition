@@ -13,6 +13,9 @@ class FolderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Folder
         fields = '__all__'
+    class Meta:
+        model = Folder
+        fields = '__all__'
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:

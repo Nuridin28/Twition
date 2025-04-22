@@ -2,16 +2,17 @@
 @if (rendering) {
   <header class="document-editor-component__header">
     <input class="open-document-name" type="text" [(ngModel)]="this.document.title"
-    (blur)="renameDocument(document.title)">
+    (blur)="renameDocument(document.title)"
+    [formControl]="titleControl">
 
     <p>
       <span class="document-info">
         <img src="/assets/images/folder-icon.svg">
-        {{ this.document.folder ? this.document.folder.title : 'Root folder'}}
+        {{ this.folderTitle }}
       </span>
       <span class="document-info">
         <img src="/assets/images/clock-icon.svg">
-        {{ formatedCreationDate }}
+        {{ document.createdAt }}
       </span>
     </p>
     <hr>
