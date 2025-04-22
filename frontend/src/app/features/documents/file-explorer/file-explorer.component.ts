@@ -5,6 +5,7 @@ import {DocumentService} from '../document.service';
 import {Folder} from '../../../core/interfaces/folder';
 import {AppFile} from '../../../core/interfaces/file';
 import {FormsModule} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import {User} from '../../../core/interfaces/user';
 
 
@@ -14,6 +15,7 @@ import {User} from '../../../core/interfaces/user';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule
   ],
   templateUrl: './file-explorer.component.html',
   styleUrl: './file-explorer.component.css'

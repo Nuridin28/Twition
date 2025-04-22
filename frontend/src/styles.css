@@ -1,8 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* Global Styles */
 :root {
   --light-color: #ffffff;
-  /*--light-color: #C8C8C8;*/
   --dark-color: #1B1B1B;
   --interface-color: #272727;
   --search-bar-color: #333333;
@@ -11,9 +9,36 @@
   --filtro-color: #484848;
   --categories-color: #868686;
   --tags-color: #898989;
-  --background-black : #1B1B1B;
+
+  --background-black: #1B1B1B;
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1f1f1f;
+  --card-text: #cccccc;
+  --accent-color: #3b82f6;
+  --input-bg: #2a2a2a;
+  --input-text: #ffffff;
+  --border-color: #444444;
+  --hover-bg: #5c5c5c;
+  --sidebar-bg: #1f1f1f;
+  --sidebar-text: #cccccc;
+  --hover-text: #ffffff;
+
+  --error-color: #dc3545;
+  --button-text: #ffffff;
+  --edit-btn: #007bff;
+  --edit-hover: #0056b3;
+  --logout-btn: #dc3545;
+  --logout-hover: #a51d2d;
+  --save-btn: #28a745;
+  --save-hover: #1f7e35;
+  --go-back-bg: #6c757d;
+  --go-back-hover: #5a6268;
+  --input-readonly-bg: #e6e6e6;
+  --input-readonly-color: #666;
 }
 
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -22,30 +47,49 @@
 }
 
 body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+/* Light Theme Override */
 body.theme-light {
-  background-color: #f9fafb;
-  color: #111827;
+  --bg-color: #f5f5f7;
+  --text-color: #1f1f1f;
+  --card-bg: #ffffff;
+  --card-text: #333333;
+  --accent-color: #3b82f6;
+  --input-bg: #f0f0f0;
+  --input-text: #1f1f1f;
+  --border-color: #cccccc;
+  --hover-bg: #e6e6e6;
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #444444;
+  --hover-text: #000000;
+
+  --light-color: #060606;
+  --dark-color: #ffffff;
+  --interface-color: #d6d6d6;
+  --search-bar-color: #9b9b9b;
+  --blue-color: #3471FF;
+  --light-blue-color: #2760ff;
+  --filtro-color: #7b7b7b;
+  --categories-color: #868686;
+  --tags-color: #898989;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-body.theme-dark {
-  /* background-color: #111827;
-  color: #f9fafb; */
 
-  color: var(--light-color);
-  background: var(--background-black);
-}
 
-button {
-  cursor: pointer;
-}
 
+/* Buttons and Links */
+button,
 a {
   cursor: pointer;
 }
 
+/* Accessibility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -58,11 +102,7 @@ a {
   border-width: 0;
 }
 
-body {
-  color: var(--light-color);
-  background-color: var(--background-black);
-}
-
+/* Font Imports */
 @font-face {
   font-family: 'Poppins';
   src: url('../public/assets/fonts/Poppins/Poppins-Light.ttf') format('truetype');
@@ -76,7 +116,6 @@ body {
   font-weight: 400;
   font-style: normal;
 }
-
 
 @font-face {
   font-family: 'Poppins';
@@ -99,6 +138,157 @@ body {
   font-style: normal;
 }
 
+/* Page background and layout */
+:host {
+  display: block;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 2rem;
+  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s;
+}
 
-/*html, body { height: 100%; }*/
-/*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+/* Optional: style other UI parts */
+h2 {
+  color: var(--text-color);
+}
+
+label {
+  font-weight: bold;
+}
+
+select {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.settings-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 32px;
+  min-height: 900px;
+  max-width: 5000px;
+  background-color: var(--bg-color);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  min-width: 350px;
+}
+
+.profile-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+/* Back Button */
+.go-back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Main content layout */
+.settings-content {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  max-width: 1500px; /* more realistic than 5000px */
+  width: 100%;
+  align-items: flex-start;
+  margin-top: 80px; /* reduce top margin */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sidebar styles */
+.settings-sidebar {
+  flex-direction: column;
+  background-color: var(--sidebar-bg);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 100px;
+  width: 280px;
+  min-height: 35vh;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Sidebar buttons */
+.settings-sidebar button {
+  background: transparent;
+  color: var(--sidebar-text);
+  padding: 25px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 18px;
+  width: 90%;
+}
+
+body.theme-light .settings-sidebar button:hover {
+  background-color: #d4d4d4 !important; /* Lighter color for light theme */
+  color: white !important;
+}
+
+/* Dark Theme Specific Hover (unchanged) */
+body.theme-dark .settings-sidebar button:hover {
+  background-color: #5c5c5c; /* Darker color for dark theme */
+  color: white;
+}
+
+/* Active State (same for both themes) */
+.settings-sidebar button.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.settings-sidebar button:hover {
+  background-color: #5c5c5c;
+  color: white;
+}
+
+/* Section content */
+.profile-card {
+  background-color: var(--card-bg);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: auto;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

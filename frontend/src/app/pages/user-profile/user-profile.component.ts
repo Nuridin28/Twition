@@ -1,74 +1,102 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Location } from '@angular/common'; 
+import { Location } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { UserService } from '../../core/services/user.service';  
+import { AuthService } from '../../core/services/auth.service'; 
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule, TranslateModule],
 })
-export class UserProfileComponent {
-  constructor(private location: Location) {}
-  // it is default avatar(because in register there is no upload avatar option)
+export class UserProfileComponent implements OnInit {
   defaultAvatar = '/assets/images/default.jpg';
-  // flag to toggle between view and edit modes
   isEditing = false;
-  
-  // mock data stored in user object(temporary)
-  user = {
-    name: 'John Doe',
-    email: 'john@example.com',
+  user: any = {
+    name: '',
+    email: '',
     avatar: this.defaultAvatar
   };
-  // copy of user object to edit
-  editedUser = { ...this.user };
-  //email validation flag(good email or bad email)
+  editedUser: any = { ...this.user };
   isEmailValid = true;
 
-  //this one enables the edit mode and resets the data with flags
+  constructor(
+    private location: Location, 
+    private userService: UserService,  
+    private authService: AuthService  
+  ) {}
+
+  ngOnInit() {
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    const currentUser = this.authService.getCurrentUser(); 
+    if (currentUser && currentUser.id) {
+      this.userService.getUserProfile().subscribe(
+        (response) => {
+          this.user = response;
+          this.editedUser = { ...this.user };
+        },
+        (error) => {
+          console.error('Error fetching user data:', error);
+        }
+      );
+    } else {
+      console.error('No user found');
+    }
+  }
+
   enableEdit() {
     this.isEditing = true;
-    this.editedUser = { ...this.user };
+    this.editedUser = { ...this.user };  
     this.isEmailValid = true;
   }
 
-  //save the changes(if only email is good)
   saveChanges() {
     if (this.validateEmail(this.editedUser.email)) {
-      this.user = { ...this.editedUser };
-      this.isEditing = false;
+      this.userService.updateUserProfile(this.editedUser).subscribe(
+        (response) => {
+          this.user = { ...this.editedUser };
+          this.isEditing = false;
+        },
+        (error) => {
+          console.error('Error updating user profile:', error);
+        }
+      );
     } else {
       this.isEmailValid = false;
     }
   }
 
-  //logout is not made yet
   logout() {
+    this.authService.logout();  
     console.log('User logged out');
   }
-
 
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  //avatar file changes and saves(reads the file as data url base 64 image)
   onAvatarChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.editedUser.avatar = e.target.result; 
+        this.editedUser.avatar = e.target.result;
       };
       reader.readAsDataURL(file);
     }
   }
 
   goBack() {
-    this.location.back(); 
+    this.location.back();
   }
 }

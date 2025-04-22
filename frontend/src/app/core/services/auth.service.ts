@@ -20,11 +20,12 @@ interface LoginResponse {
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   private currentUser: User | null = null;
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'user_data';
-  private apiUrl = 'http://127.0.0.1:8000/api/accounts'; //api url for login and register
+  private apiUrl = 'http://127.0.0.1:8000/api/accounts';
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
