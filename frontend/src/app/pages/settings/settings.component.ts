@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ThemeService } from '../../core/services/theme.service';
+import { UserService } from '../../core/services/user.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -40,7 +41,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     public themeService: ThemeService,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {

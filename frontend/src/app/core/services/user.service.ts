@@ -16,5 +16,5 @@ export class UserService {
 
     updateUserProfile(data: any): Observable<any> {
         return this.http.patch('http://127.0.0.1:8000/api/accounts/me/', data);
-      }
+    }
   }

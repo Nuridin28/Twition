@@ -89,9 +89,9 @@ export class UserProfileComponent implements OnInit {
             name: `${firstName} ${lastName}`,
           };
   
-        
+          
           this.isEditing = false;
-          this.isEmailValid = true; 
+          this.isEmailValid = true;  
   
           console.log('User profile updated successfully');
         },
