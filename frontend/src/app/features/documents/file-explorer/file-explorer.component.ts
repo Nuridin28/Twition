@@ -95,7 +95,14 @@ export class FileExplorerComponent implements OnInit {
     );
 
   }
-
+  deleteFolder(id: string) {
+    this.documentService.deleteFolder(id).subscribe(
+      result => {
+        console.log('Folder deleted : ', result);
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+      }
+    )
+  }
   onClickFile(document: AppFile) {
     console.log(document);
     this.documentService.selectDocument(document);
@@ -118,8 +125,22 @@ export class FileExplorerComponent implements OnInit {
     console.log(this.editingFolderId);
   }
 
-  finishRenaming() {
+  finishRenaming(node: Folder) {
     this.editingFolderId = null;
+    let postFolder = {
+      id: node.id,
+      title: node.title,
+      author: node.authorId,
+      parent: node.parent,
+    }
+    this.documentService.renameFolder(postFolder).subscribe(
+      result => {
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+        console.log('Renamed folder: ', result);
+
+      }
+    )
+
     console.log('Folder renamed!');
   }
 

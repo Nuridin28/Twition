@@ -64,4 +64,18 @@ export class DocumentService {
       })
     });
   }
+  renameFolder(folder: any) {
+    return this.http.put<Folder>(this.baseUrl + 'folder/', folder, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.getToken()}`
+      })
+    });
+  }
+  deleteFolder(id: string) {
+    return this.http.delete<Folder>(this.baseUrl + 'folder/' + id, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.getToken()}`
+      })
+    })
+  }
 }

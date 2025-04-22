@@ -19,7 +19,7 @@ def build_folder(folder):
         'title': folder.title,
         'type': 'folder',
         'expanded': False,
-        'parent': folder.parent,
+        'parent': None,
         'children': []
     }
 # Create your views here.
@@ -81,7 +81,22 @@ class FolderView(APIView):
     def get(self, request, id=None):
         folder = Folder.objects.get(id=id)
         return Response(build_folder(folder))
-        
+
+    def put(self, request):
+        serializer = FolderSerializer(instance=Folder.objects.get(id=request.data['id']),
+                                      data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id=None):
+        folder = Folder.objects.get(id=id)
+        if folder:
+            folder.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class DocumentView(APIView):
     permission_classes = [permissions.IsAuthenticated]

@@ -38,13 +38,14 @@
 
         <input *ngIf="editingFolderId === node.id && node.type === 'folder'"
                [(ngModel)]="node.title"
-               (blur)="finishRenaming()"
-               (keydown.enter)="finishRenaming()"
+               (blur)="finishRenaming(node)"
+               (keydown.enter)="finishRenaming(node)"
                autofocus
                type="text"
                class="folder-rename-input node-name"/>
 
         <span *ngIf="editingFolderId !== node.id || node.type=='document'" (dblclick)="node.type === 'folder' ? startRenaming(node): null" class="node-name">{{ node.title }}</span>
+        <span *ngIf="node.type === 'folder'" (click)="deleteFolder(node.id)" class="folder-delete">Delete</span>
       </div>
 
       <!-- next layer -->
