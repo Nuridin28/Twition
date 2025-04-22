@@ -68,21 +68,26 @@ export class FileExplorerComponent implements OnInit {
     this.documentService.postFolder(postFolder).subscribe(
       result => {
         console.log('Folder created: ', result)
-        let folder: Folder = {
-          id: result.id,
-          title: result.title,
-          authorId: this.author.id,
-          parent: result.parent,
-          children: [],
-          expanded: false,
-          type: 'folder'
-        }
-        if (folder.parent == null) {
-          this.treeData.push(folder);
-        }
-        else {
-          folder.parent.children.push(folder);
-        }
+        this.documentService.getTree().subscribe(
+          (content) => {
+            this.treeData = content
+          }
+        )
+        // let folder: Folder = {
+        //   id: result.id,
+        //   title: result.title,
+        //   authorId: this.author.id,
+        //   parent: result.parent,
+        //   children: [],
+        //   expanded: false,
+        //   type: 'folder'
+        // }
+        // if (folder.parent == null) {
+        //   this.treeData.push(folder);
+        // }
+        // else {
+        //   folder.parent.children.push(folder);
+        // }
         console.log('Tree data updated: ', this.treeData);
       }
     );
@@ -118,6 +123,7 @@ export class FileExplorerComponent implements OnInit {
 
   ngOnInit(): void {
     this.author = JSON!.parse(localStorage.getItem('user_data')!);
+    if (!this.author) this.author = JSON!.parse(sessionStorage.getItem('user_data')!);
     this.documentService.getTree().subscribe(
       (content) => {
         this.treeData = content

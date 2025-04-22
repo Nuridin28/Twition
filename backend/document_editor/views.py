@@ -12,7 +12,7 @@ from .serilizers import *
 from .models import *
 
 
-def build_folder_tree(folder):
+def build_folder(folder):
     return {
         'id': folder.id,
         'authorId': folder.author.id,
@@ -42,7 +42,7 @@ class FilesTreeView(APIView):
                 'title': document.title,
                 'content': document.content,
                 'author': document.author.id,
-                'tags': document.tags.all(),
+                'tags': [],
                 'folderId': folder_id,
                 'createdAt': document.created_at,
                 'updatedAt': document.updated_at,
@@ -56,7 +56,7 @@ class FilesTreeView(APIView):
                 'title': folder.title,
                 'type': 'folder',
                 'expanded': False,
-                'parent': folder.parent ,
+                'parent': None,
                 'children': [build_folder_tree(child) for child in folder.children.all()] +
                 [serialize_document(document) for document in folder.documents.all()]
             }
@@ -64,6 +64,7 @@ class FilesTreeView(APIView):
         root_documents = Document.objects.filter(folder=None)
         data = ([serialize_document(document) for document in root_documents] +
                 [build_folder_tree(folder) for folder in root_folders])
+        # print(data)
         return Response(data)
 
 class FolderView(APIView):
@@ -79,7 +80,7 @@ class FolderView(APIView):
 
     def get(self, request, id=None):
         folder = Folder.objects.get(id=id)
-        return Response(build_folder_tree(folder))
+        return Response(build_folder(folder))
         
 
 class DocumentView(APIView):
