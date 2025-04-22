@@ -1,27 +1,54 @@
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-class UserRegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        token['email'] = user.email
+        return token
+
+class RegisterSerializer(serializers.ModelSerializer):
+    firstName = serializers.CharField(source='first_name')
+    lastName = serializers.CharField(source='last_name')
+    password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password])
 
     class Meta:
-        model = get_user_model()
-        fields = ['username', 'password', 'email', 'first_name', 'last_name', 'bio', 'avatar']
+        model = User
+        fields = ('firstName', 'lastName', 'email', 'password')
+        
+    def validate(self, attrs):
+        email = attrs.get('email')
+        if email and User.objects.filter(email=email).exists():
+            raise serializers.ValidationError({"email": "User with this email already exists."})
+        return attrs
 
     def create(self, validated_data):
-        user = get_user_model().objects.create_user(**validated_data)
+        email = validated_data['email']
+        username = email.split('@')[0]  
+        suffix = 1
+        while User.objects.filter(username=username).exists():
+            username = f"{email.split('@')[0]}_{suffix}"
+            suffix += 1
+            
+        user = User.objects.create(
+            username=username,
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
         return user
 
-class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
-
-    def validate(self, data):
-        from django.contrib.auth import authenticate
-        user = authenticate(username=data['username'], password=data['password'])
-        if not user:
-            raise serializers.ValidationError("Invalid credentials")
-        
-        refresh = RefreshToken.for_user(user)
-        return {'refresh': str(refresh), 'access': str(refresh.access_token)}
+class UserSerializer(serializers.ModelSerializer):
+    firstName = serializers.CharField(source='first_name')
+    lastName = serializers.CharField(source='last_name')
+    
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'firstName', 'lastName')
