@@ -69,27 +69,39 @@ export class FileExplorerComponent implements OnInit {
     this.documentService.postFolder(postFolder).subscribe(
       result => {
         console.log('Folder created: ', result)
-        let folder: Folder = {
-          id: result.id,
-          title: result.title,
-          authorId: this.author.id,
-          parent: result.parent,
-          children: [],
-          expanded: false,
-          type: 'folder'
-        }
-        if (folder.parent == null) {
-          this.treeData.push(folder);
-        }
-        else {
-          folder.parent.children.push(folder);
-        }
+        this.documentService.getTree().subscribe(
+          (content) => {
+            this.treeData = content
+          }
+        )
+        // let folder: Folder = {
+        //   id: result.id,
+        //   title: result.title,
+        //   authorId: this.author.id,
+        //   parent: result.parent,
+        //   children: [],
+        //   expanded: false,
+        //   type: 'folder'
+        // }
+        // if (folder.parent == null) {
+        //   this.treeData.push(folder);
+        // }
+        // else {
+        //   folder.parent.children.push(folder);
+        // }
         console.log('Tree data updated: ', this.treeData);
       }
     );
 
   }
-
+  deleteFolder(id: string) {
+    this.documentService.deleteFolder(id).subscribe(
+      result => {
+        console.log('Folder deleted : ', result);
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+      }
+    )
+  }
   onClickFile(document: AppFile) {
     console.log(document);
     this.documentService.selectDocument(document);
@@ -112,8 +124,22 @@ export class FileExplorerComponent implements OnInit {
     console.log(this.editingFolderId);
   }
 
-  finishRenaming() {
+  finishRenaming(node: Folder) {
     this.editingFolderId = null;
+    let postFolder = {
+      id: node.id,
+      title: node.title,
+      author: node.authorId,
+      parent: node.parent,
+    }
+    this.documentService.renameFolder(postFolder).subscribe(
+      result => {
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+        console.log('Renamed folder: ', result);
+
+      }
+    )
+
     console.log('Folder renamed!');
   }
 
