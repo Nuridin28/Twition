@@ -7,9 +7,9 @@ export interface AppFile {
   id: number;
   title: string;
   content: string;
-  author: User | 'admin';
+  author: string | 'admin';
   tags: Tag[];
-  folder: Folder | null | undefined;
+  folderId: string;
   createdAt: Date;
   updatedAt: Date;
   type: 'document';

@@ -1,4 +1,4 @@
-/* Page background and layout */
+
 :host {
   display: block;
   background-color: var(--bg-color);
@@ -12,7 +12,7 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Optional: style other UI parts */
+
 h2 {
   color: var(--text-color);
 }
@@ -51,7 +51,7 @@ select {
   min-width: 0;
 }
 
-/* Back Button */
+
 .go-back-btn {
   position: fixed;
   top: 20px;
@@ -71,20 +71,20 @@ select {
   background-color: #5a6268;
 }
 
-/* Main content layout */
+
 .settings-content {
   display: flex;
   flex-direction: row;
   gap: 32px;
-  max-width: 1500px; /* more realistic than 5000px */
+  max-width: 1500px;
   width: 100%;
   align-items: flex-start;
-  margin-top: 80px; /* reduce top margin */
+  margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Sidebar styles */
+
 .settings-sidebar {
   flex-direction: column;
   background-color: var(--sidebar-bg);
@@ -101,9 +101,8 @@ select {
   overflow-y: auto;
 }
 
-/* Sidebar buttons */
+
 .settings-sidebar button {
-  /* background: transparent; */
   color: var(--sidebar-text);
   padding: 25px;
   border: none;
@@ -122,13 +121,11 @@ body.theme-light .settings-sidebar button:hover {
   color: var(--hover-text);
 }
 
-/* Dark Theme Specific Hover (unchanged) */
 body.theme-dark .settings-sidebar button:hover {
   background-color: var(--hover-bg);
   color: var(--hover-text);
 }
 
-/* Active State (same for both themes) */
 .settings-sidebar button.active {
   background-color: var(--accent-color);
   color: white;
@@ -139,7 +136,6 @@ body.theme-dark .settings-sidebar button:hover {
   color: var(--hover-text);
 }
 
-/* Section content */
 .profile-card {
   background-color: var(--card-bg);
   padding: 32px;
@@ -175,7 +171,7 @@ body.theme-dark .settings-sidebar button:hover {
   color: var(--card-text);
 }
 
-/* Form elements */
+
 .input-box {
   width: 100%;
   padding: 12px;
@@ -190,7 +186,7 @@ body.theme-dark .settings-sidebar button:hover {
   outline: 2px solid var(--accent-color);
 }
 
-/* Labels */
+
 label {
   display: block;
   margin-bottom: 4px;
@@ -202,14 +198,13 @@ label {
   margin-bottom: 24px;
 }
 
-/* Password input wrapper */
+
 .password-field {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-/* Eye icon for password visibility */
 .eye-btn {
   position: absolute;
   right: 16px;
@@ -226,7 +221,6 @@ label {
   color: var(--accent-color);
 }
 
-/* General buttons */
 .btn {
   padding: 12px 24px;
   border: none;
@@ -237,7 +231,6 @@ label {
   font-size: 16px;
 }
 
-/* Edit button */
 .btn.edit {
   background-color: var(--accent-color);
   color: white;
@@ -263,7 +256,6 @@ body.theme-light .btn.edit.go-profile {
   background-color: var(--light-blue-color);
 }
 
-/* Save button */
 .btn.save {
   background-color: var(--accent-color);
   color: white;
@@ -291,7 +283,6 @@ body.theme-light .btn.edit.go-profile {
   padding-left: 4px;
 }
 
-/* Appearance buttons */
 .appearance-buttons {
   display: flex;
   justify-content: space-between;
@@ -317,7 +308,6 @@ body.theme-light .btn.edit.go-profile {
   color: white;
 }
 
-/* Button group layout */
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -325,14 +315,12 @@ body.theme-light .btn.edit.go-profile {
   margin-top: 16px;
 }
 
-/* Contact buttons inside anchor tags */
 .button-group a.btn {
   text-decoration: none;
   display: inline-block;
 }
 
 
-/* Media Query for responsiveness */
 @media (max-width: 768px) {
   .settings-content {
     flex-direction: column;

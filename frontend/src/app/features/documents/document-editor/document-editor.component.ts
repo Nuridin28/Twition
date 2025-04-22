@@ -16,17 +16,25 @@ export class DocumentEditorComponent implements OnInit {
   rendering = true;
   isSaving = false;
   contentControl = new FormControl('');
-  formatedCreationDate?: string | null = null;
+  titleControl = new FormControl('');
+  folderTitle!: string;
+
   constructor(private documentService: DocumentService) {}
 
   ngOnInit() {
     this.documentService.selectedDocument.subscribe(document => {
       if (document) {
         this.document = document;
-        this.formatedCreationDate = `
-        ${document.createdAt.getDate()}/${document.createdAt.getMonth() + 1}/${document.createdAt.getFullYear()}` +
-        ` ${document.createdAt.getHours()}:${document.createdAt.getMinutes()}`;
         this.contentControl.setValue(document.content, { emitEvent: false });
+        this.titleControl.setValue(document.title, { emitEvent: false });
+        if (this.document.folderId) {
+          this.documentService.getFolder(String(this.document.folderId)).subscribe(folder => {
+            this.folderTitle = folder.title;
+            console.log(folder);
+          })
+        } else {
+          this.folderTitle = 'Root Folder';
+        }
         this.rendering = true;
       }
       else {
@@ -35,20 +43,30 @@ export class DocumentEditorComponent implements OnInit {
     })
 
     this.contentControl.valueChanges.pipe(debounceTime(1000)).subscribe((newContent) => {
-      if (this.document) {
-        this.autoSave(newContent);
+      if (this.document && newContent) {
+        this.autoSave(newContent, 'content');
+      }
+    })
+    this.titleControl.valueChanges.pipe(debounceTime(1000)).subscribe((newTitle) => {
+      if (this.document && newTitle) {
+        this.autoSave(newTitle, 'title');
       }
     })
   }
 
-  autoSave(newContent: string | null) {
+  autoSave(updated_data: string, type: string) {
     this.isSaving = true;
 
-    newContent ? this.document.content = newContent : null;
+    type === 'content' ? this.document.content = updated_data : this.document.title = updated_data;
 
-    this.isSaving = false;
     this.document.updatedAt = new Date();
-    console.log(`${this.document.title} is saved!`);
+
+    this.documentService.saveNote(this.document).subscribe(
+      result => {
+        this.isSaving = false;
+        console.log(`${this.document.title} is saved!`);
+      }
+    )
   }
 
   renameDocument(title: string) {

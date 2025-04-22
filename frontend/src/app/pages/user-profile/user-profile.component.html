@@ -1,21 +1,19 @@
 <button class="go-back-btn" (click)="goBack()">← {{ 'PROFILE.GO_BACK' | translate }}</button>
 
 <div class="profile-card">
-  <!-- Avatar section -->
+  <!-- avatar section -->
   <div class="avatar-section">
     <img [src]="isEditing ? editedUser.avatar : user.avatar" alt="User Avatar" class="avatar">
 
-    <!-- Upload avatar button (visible in edit mode only) -->
     <label *ngIf="isEditing" class="upload-btn">
       {{ 'PROFILE.UPLOAD_AVATAR' | translate }}
       <input type="file" (change)="onAvatarChange($event)" accept="image/*" hidden>
     </label>
   </div>
 
-  <!-- Info section -->
-  <div class="info-section">
 
-    <!-- Viewing mode -->
+  <div class="info-section">
+    <!-- viewing mode -->
     <div *ngIf="!isEditing">
       <div class="form-group">
         <label>{{ 'PROFILE.NAME' | translate }}:</label>
@@ -31,7 +29,7 @@
       </div>
     </div>
 
-    <!-- Edit mode -->
+    <!-- edit mode -->
     <div *ngIf="isEditing">
       <div class="form-group">
         <label>{{ 'PROFILE.NAME' | translate }}:</label>

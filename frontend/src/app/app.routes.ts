@@ -38,7 +38,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'welcome',  
+    path: 'welcome',
     component: WelcomeComponent,
   },
 
