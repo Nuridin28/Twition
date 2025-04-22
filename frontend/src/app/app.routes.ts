@@ -38,9 +38,20 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+<<<<<<< HEAD
     path: 'welcome',
+=======
+    path: 'welcome',  
+>>>>>>> 8223bd182c44bbbb7af15dd45e473f961e63957b
     component: WelcomeComponent,
   },
 
   { path: '**', component: NotFoundComponent },
+<<<<<<< HEAD
 ]
+=======
+
+]
+
+
+>>>>>>> 8223bd182c44bbbb7af15dd45e473f961e63957b
