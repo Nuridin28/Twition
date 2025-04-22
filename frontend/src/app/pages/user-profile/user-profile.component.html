@@ -1,46 +1,51 @@
-<button class="go-back-btn" (click)="goBack()">← Back to Dashboard</button>
+<button class="go-back-btn" (click)="goBack()">← {{ 'PROFILE.GO_BACK' | translate }}</button>
+
 <div class="profile-card">
-    <!--this is avatar section-->
-    <div class="avatar-section">
-      <img [src]="isEditing ? editedUser.avatar : user.avatar" alt="User Avatar" class="avatar">
-    <!--this "upload avatar" button is visible only in edit mode-->
-      <label *ngIf="isEditing" class="upload-btn">
-        Upload Avatar
-        <input type="file" (change)="onAvatarChange($event)" accept="image/*" hidden>
-      </label>
-    </div>
-    <!--this section is for info-->
-    <div class="info-section">
-    <!--viewing mode, u are not able to edit in here-->
-      <div *ngIf="!isEditing">
-        <div class="form-group">
-          <label>Name:</label>
-          <input type="text" [value]="user.name" readonly class="input-box">
-        </div>
-        <div class="form-group">
-          <label>Email:</label>
-          <input type="email" [value]="user.email" readonly class="input-box">
-        </div>
-        <div class="button-group">
-          <button class="btn edit" (click)="enableEdit()">Edit</button>
-          <button class="btn logout" (click)="logout()">Logout</button>
-        </div>
+  <!-- avatar section -->
+  <div class="avatar-section">
+    <img [src]="isEditing ? editedUser.avatar : user.avatar" alt="User Avatar" class="avatar">
+
+    <label *ngIf="isEditing" class="upload-btn">
+      {{ 'PROFILE.UPLOAD_AVATAR' | translate }}
+      <input type="file" (change)="onAvatarChange($event)" accept="image/*" hidden>
+    </label>
+  </div>
+
+
+  <div class="info-section">
+    <!-- viewing mode -->
+    <div *ngIf="!isEditing">
+      <div class="form-group">
+        <label>{{ 'PROFILE.NAME' | translate }}:</label>
+        <input type="text" [value]="user.name" readonly class="input-box">
       </div>
-      <!--edit mode is here!-->
-      <div *ngIf="isEditing">
-        <div class="form-group">
-          <label>Name:</label>
-          <input type="text" [(ngModel)]="editedUser.name" class="input-box">
-        </div>
-        <div class="form-group">
-          <label>Email:</label>
-          <input type="email" [(ngModel)]="editedUser.email" class="input-box" [class.invalid]="!isEmailValid">
-          <div *ngIf="!isEmailValid" class="error-msg">Please enter a valid email</div>
-        </div>
-        <div class="button-group">
-          <button class="btn save" (click)="saveChanges()">Save</button>
-        </div>
+      <div class="form-group">
+        <label>{{ 'PROFILE.EMAIL' | translate }}:</label>
+        <input type="email" [value]="user.email" readonly class="input-box">
+      </div>
+      <div class="button-group">
+        <button class="btn edit" (click)="enableEdit()">{{ 'PROFILE.EDIT' | translate }}</button>
+        <button class="btn logout" (click)="logout()">{{ 'PROFILE.LOGOUT' | translate }}</button>
       </div>
     </div>
+
+    <!-- edit mode -->
+    <div *ngIf="isEditing">
+      <div class="form-group">
+        <label>{{ 'PROFILE.NAME' | translate }}:</label>
+        <input type="text" [(ngModel)]="editedUser.name" class="input-box">
+      </div>
+      <div class="form-group">
+        <label>{{ 'PROFILE.EMAIL' | translate }}:</label>
+        <input type="email" [(ngModel)]="editedUser.email" class="input-box" [class.invalid]="!isEmailValid">
+        <div *ngIf="!isEmailValid" class="error-msg">
+          {{ 'PROFILE.INVALID_EMAIL' | translate }}
+        </div>
+      </div>
+      <div class="button-group">
+        <button class="btn save" (click)="saveChanges()">{{ 'PROFILE.SAVE' | translate }}</button>
+      </div>
+    </div>
+
+  </div>
 </div>
-  

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FileNode} from '../../../core/file-node';
 import {CommonModule} from '@angular/common';
 import {DocumentService} from '../document.service';
 import {Folder} from '../../../core/interfaces/folder';
 import {AppFile} from '../../../core/interfaces/file';
 import {FormsModule} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import {User} from '../../../core/interfaces/user';
 
 
 @Component({
@@ -12,59 +14,94 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule
   ],
   templateUrl: './file-explorer.component.html',
   styleUrl: './file-explorer.component.css'
 })
-export class FileExplorerComponent {
+export class FileExplorerComponent implements OnInit {
+
+  author!: User;
+  treeData!: Array<Folder | AppFile>;
 
   constructor(private documentService: DocumentService) {}
 
-  treeData: Array<Folder | AppFile> = [];
   selectedFolderHistory: Array<Folder | null> = [null];
   selectedFolder: Folder | null | undefined = null;
   editingFolderId: number | null = null;
 
   createNewNote() {
-    let file: AppFile = {
-      id: 0,
+    console.log('Creating new note');
+
+    let postDocument = {
       title: 'New note',
-      author: 'admin',
-      content: 'text text text',
-      folder: this.selectedFolder,
+      content: '',
+      author: this.author.id,
       tags: [],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      type: 'document',
+      folder: this.selectedFolder?.id,
+      created_at: new Date(),
+      updated_at: new Date(),
     }
-    if (file.folder == null) {
-      this.treeData.push(file);
-    }
-    else {
-      file.folder.children.push(file);
-    }
-    console.log(this.treeData);
+
+    this.documentService.postDocument(postDocument).subscribe(
+      result => {
+        console.log('Note created: ', result);
+        this.documentService.getTree().subscribe(
+          (content) => {
+            this.treeData = content
+          }
+        )
+      }
+    )
+
+    console.log('Tree data updated: ', this.treeData);
   }
 
   createNewFolder() {
-    let folder: Folder = {
-      author: 'admin',
-      children: [],
-      expanded: false,
-      id: 0,
-      parent: this.selectedFolder,
-      title: 'New Folder',
-      type: 'folder'
-    }
-    if (folder.parent == null) {
-      this.treeData.push(folder);
-    }
-    else {
-      folder.parent.children.push(folder);
-    }
-    console.log(this.treeData);
-  }
+    console.log('Creating new folder');
 
+    let postFolder = {
+      title: 'New Folder',
+      author: this.author.id,
+      parent: this.selectedFolder?.id,
+    }
+
+    this.documentService.postFolder(postFolder).subscribe(
+      result => {
+        console.log('Folder created: ', result)
+        this.documentService.getTree().subscribe(
+          (content) => {
+            this.treeData = content
+          }
+        )
+        // let folder: Folder = {
+        //   id: result.id,
+        //   title: result.title,
+        //   authorId: this.author.id,
+        //   parent: result.parent,
+        //   children: [],
+        //   expanded: false,
+        //   type: 'folder'
+        // }
+        // if (folder.parent == null) {
+        //   this.treeData.push(folder);
+        // }
+        // else {
+        //   folder.parent.children.push(folder);
+        // }
+        console.log('Tree data updated: ', this.treeData);
+      }
+    );
+
+  }
+  deleteFolder(id: string) {
+    this.documentService.deleteFolder(id).subscribe(
+      result => {
+        console.log('Folder deleted : ', result);
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+      }
+    )
+  }
   onClickFile(document: AppFile) {
     console.log(document);
     this.documentService.selectDocument(document);
@@ -84,11 +121,38 @@ export class FileExplorerComponent {
 
   startRenaming(node: Folder) {
     this.editingFolderId = node.id;
+    console.log(this.editingFolderId);
   }
 
-  finishRenaming() {
+  finishRenaming(node: Folder) {
     this.editingFolderId = null;
+    let postFolder = {
+      id: node.id,
+      title: node.title,
+      author: node.authorId,
+      parent: node.parent,
+    }
+    this.documentService.renameFolder(postFolder).subscribe(
+      result => {
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+        console.log('Renamed folder: ', result);
+
+      }
+    )
+
     console.log('Folder renamed!');
+  }
+
+  ngOnInit(): void {
+    this.author = JSON!.parse(localStorage.getItem('user_data')!);
+    if (!this.author) this.author = JSON!.parse(sessionStorage.getItem('user_data')!);
+    this.documentService.getTree().subscribe(
+      (content) => {
+        this.treeData = content
+        console.log('Notes retrieved successfully!')
+        console.log(content)
+      }
+    )
   }
 
 }
