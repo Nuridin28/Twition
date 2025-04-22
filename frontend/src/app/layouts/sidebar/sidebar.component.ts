@@ -3,13 +3,15 @@ import { FileExplorerComponent } from '../../features/documents/file-explorer/fi
 import { CommonModule } from '@angular/common';
 import {FileNode} from '../../core/file-node';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidebar',
   imports: [
     FileExplorerComponent,
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'

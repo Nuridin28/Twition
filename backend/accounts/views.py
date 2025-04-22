@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny
 
 
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
