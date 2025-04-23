@@ -84,6 +84,12 @@ class FolderView(APIView):
 
 class DocumentView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        documents = Document.objects.all()
+        serializer = DocumentSerializer(documents, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         serializer = DocumentSerializer(data=request.data)
         if serializer.is_valid():
