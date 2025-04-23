@@ -23,7 +23,6 @@ def build_folder_tree(folder):
         'children': []
     }
 # Create your views here.
-
 class FilesTreeView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -56,15 +55,18 @@ class FilesTreeView(APIView):
                 'title': folder.title,
                 'type': 'folder',
                 'expanded': False,
-                'parent': folder.parent ,
-                'children': [build_folder_tree(child) for child in folder.children.all()] +
-                [serialize_document(document) for document in folder.documents.all()]
+                'parent': folder.parent,
+                'children': [build_folder_tree(child) for child in folder.children.filter(author=request.user)] +
+                            [serialize_document(document) for document in folder.documents.filter(author=request.user)]
             }
-        root_folders = Folder.objects.filter(parent=None)
-        root_documents = Document.objects.filter(folder=None)
+
+        root_folders = Folder.objects.filter(parent=None, author=request.user)
+        root_documents = Document.objects.filter(folder=None, author=request.user)
+
         data = ([serialize_document(document) for document in root_documents] +
                 [build_folder_tree(folder) for folder in root_folders])
         return Response(data)
+
 
 class FolderView(APIView):
     permission_classes = [permissions.IsAuthenticated]
