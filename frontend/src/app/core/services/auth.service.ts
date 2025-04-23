@@ -9,6 +9,7 @@ interface User {
   lastName: string;
   email: string;
   token: string;
+  avatar?: string;
 }
 
 interface LoginResponse {
@@ -24,14 +25,16 @@ export class AuthService {
   private currentUser: User | null = null;
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'user_data';
-  private apiUrl = 'http://127.0.0.1:8000/api/accounts'; //api url for login and register
+  private apiUrl = 'http://127.0.0.1:8000/api/accounts';
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
   }
 
   private loadUserFromStorage(): void {
-    const userData = localStorage.getItem(this.USER_KEY);
+    const userData =
+      localStorage.getItem(this.USER_KEY) ||
+      sessionStorage.getItem(this.USER_KEY);
     if (userData) {
       this.currentUser = JSON.parse(userData);
     }
@@ -120,6 +123,7 @@ export class AuthService {
   }
 
   public getToken(): string | null {
+    console.log('interseptor');
     const token =
       localStorage.getItem(this.TOKEN_KEY) ||
       sessionStorage.getItem(this.TOKEN_KEY);
@@ -128,5 +132,9 @@ export class AuthService {
       localStorage.getItem(this.TOKEN_KEY) ||
       sessionStorage.getItem(this.TOKEN_KEY)
     );
+  }
+
+  setCurrentUser(user: any): void {
+    this.currentUser = user;
   }
 }

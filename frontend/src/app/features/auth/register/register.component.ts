@@ -155,9 +155,8 @@ export class RegisterComponent implements OnInit {
         .subscribe({
           next: () => {
             this.isLoading = false;
-            this.router.navigate(['/login'], {
-              queryParams: { registered: 'success' },
-            });
+            this.router.navigate(['auth/login']);
+            alert('successful registration');
           },
           error: (error) => {
             this.isLoading = false;
