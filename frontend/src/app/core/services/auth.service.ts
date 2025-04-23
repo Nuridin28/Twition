@@ -21,7 +21,6 @@ interface LoginResponse {
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   private currentUser: User | null = null;
   private readonly TOKEN_KEY = 'auth_token';
@@ -34,14 +33,12 @@ export class AuthService {
 
   private loadUserFromStorage(): void {
     const userData =
-      localStorage.getItem(this.USER_KEY) || sessionStorage.getItem(this.USER_KEY);
+      localStorage.getItem(this.USER_KEY) ||
+      sessionStorage.getItem(this.USER_KEY);
     if (userData) {
       this.currentUser = JSON.parse(userData);
     }
   }
-
-
-  
 
   public login(
     email: string,
@@ -126,6 +123,7 @@ export class AuthService {
   }
 
   public getToken(): string | null {
+    console.log('interseptor');
     const token =
       localStorage.getItem(this.TOKEN_KEY) ||
       sessionStorage.getItem(this.TOKEN_KEY);
@@ -134,5 +132,9 @@ export class AuthService {
       localStorage.getItem(this.TOKEN_KEY) ||
       sessionStorage.getItem(this.TOKEN_KEY)
     );
+  }
+
+  setCurrentUser(user: any): void {
+    this.currentUser = user;
   }
 }

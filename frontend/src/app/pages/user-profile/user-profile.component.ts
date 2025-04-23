@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserService } from '../../core/services/user.service';  
-import { AuthService } from '../../core/services/auth.service'; 
+import { UserService } from '../../core/services/user.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -22,14 +22,14 @@ export class UserProfileComponent implements OnInit {
   user: any = {
     name: '',
     email: '',
-    avatar: this.defaultAvatar
+    avatar: this.defaultAvatar,
   };
   editedUser: any = { ...this.user };
   isEmailValid = true;
 
   constructor(
-    private location: Location, 
-    private userService: UserService,  
+    private location: Location,
+    private userService: UserService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -44,32 +44,32 @@ export class UserProfileComponent implements OnInit {
       };
       this.editedUser = { ...this.user };
     } else {
-      this.loadUserData(); // ⬅️ Load from API
+      this.loadUserData();
     }
   }
-  
+
   loadUserData() {
     this.userService.getUserProfile().subscribe({
       next: (response: any) => {
         console.log('Fetched profile:', response);
-  
+
         this.user = {
           name: `${response.firstName} ${response.lastName}`.trim(),
           email: response.email,
-          avatar: response.avatar || this.defaultAvatar
+          avatar: response.avatar || this.defaultAvatar,
         };
-  
+
         this.editedUser = { ...this.user };
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching user profile:', error);
-      }
+      },
     });
   }
-  
+
   enableEdit() {
     this.isEditing = true;
-    this.editedUser = { ...this.user };  
+    this.editedUser = { ...this.user };
     this.isEmailValid = true;
   }
 
@@ -77,37 +77,39 @@ export class UserProfileComponent implements OnInit {
     if (this.validateEmail(this.editedUser.email)) {
       const [firstName, ...rest] = this.editedUser.name.trim().split(' ');
       const lastName = rest.join(' ') || '';
-  
+
       const updatedData = {
         first_name: firstName,
         last_name: lastName,
-        avatar: this.editedUser.avatar,
+        email: this.editedUser.email,
       };
-  
+
       this.userService.updateUserProfile(updatedData).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.user = {
             ...this.editedUser,
             name: `${firstName} ${lastName}`,
           };
-  
-          
+
           this.isEditing = false;
-          this.isEmailValid = true;  
-  
+          this.isEmailValid = true;
+
           console.log('User profile updated successfully');
+
+          this.loadUserData();
+          this.authService.setCurrentUser(updatedData);
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error updating user profile:', error);
-        }
+        },
       });
     } else {
-      this.isEmailValid = false; 
+      this.isEmailValid = false;
     }
   }
 
   logout() {
-    this.authService.logout();  
+    this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
 
