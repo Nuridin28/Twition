@@ -62,9 +62,9 @@
       <img src="/assets/icons/home-house.svg" alt="User">
       <span class="btn-label">Dashboard</span>
     </button>
-    <button class="sidebar-btn settings">
-      <img src="/assets/icons/settings-icon.svg" alt="Settings">
-      <span class="btn-label">Settings</span>
+    <button class="sidebar-btn settings" [routerLink]="['/settings']">
+      <img src="/assets/icons/settings-icon.svg" alt="Settings" />
+      <span class="btn-label">{{ 'Settings' | translate }}</span>
     </button>
   </section>
 </div>
