@@ -112,3 +112,9 @@ header {
   outline: none;
   background: none;
 }
+.folder-delete {
+  margin-left: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: 'Nunito', sans-serif;
+}

@@ -5,8 +5,8 @@ import {DocumentService} from '../document.service';
 import {Folder} from '../../../core/interfaces/folder';
 import {AppFile} from '../../../core/interfaces/file';
 import {FormsModule} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import {User} from '../../../core/interfaces/user';
-
 
 
 @Component({
@@ -14,6 +14,7 @@ import {User} from '../../../core/interfaces/user';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule
   ],
   templateUrl: './file-explorer.component.html',
   styleUrl: './file-explorer.component.css'
@@ -68,27 +69,39 @@ export class FileExplorerComponent implements OnInit {
     this.documentService.postFolder(postFolder).subscribe(
       result => {
         console.log('Folder created: ', result)
-        let folder: Folder = {
-          id: result.id,
-          title: result.title,
-          authorId: this.author.id,
-          parent: result.parent,
-          children: [],
-          expanded: false,
-          type: 'folder'
-        }
-        if (folder.parent == null) {
-          this.treeData.push(folder);
-        }
-        else {
-          folder.parent.children.push(folder);
-        }
+        this.documentService.getTree().subscribe(
+          (content) => {
+            this.treeData = content
+          }
+        )
+        // let folder: Folder = {
+        //   id: result.id,
+        //   title: result.title,
+        //   authorId: this.author.id,
+        //   parent: result.parent,
+        //   children: [],
+        //   expanded: false,
+        //   type: 'folder'
+        // }
+        // if (folder.parent == null) {
+        //   this.treeData.push(folder);
+        // }
+        // else {
+        //   folder.parent.children.push(folder);
+        // }
         console.log('Tree data updated: ', this.treeData);
       }
     );
 
   }
-
+  deleteFolder(id: string) {
+    this.documentService.deleteFolder(id).subscribe(
+      result => {
+        console.log('Folder deleted : ', result);
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+      }
+    )
+  }
   onClickFile(document: AppFile) {
     console.log(document);
     this.documentService.selectDocument(document);
@@ -111,13 +124,28 @@ export class FileExplorerComponent implements OnInit {
     console.log(this.editingFolderId);
   }
 
-  finishRenaming() {
+  finishRenaming(node: Folder) {
     this.editingFolderId = null;
+    let postFolder = {
+      id: node.id,
+      title: node.title,
+      author: node.authorId,
+      parent: node.parent,
+    }
+    this.documentService.renameFolder(postFolder).subscribe(
+      result => {
+        this.documentService.getTree().subscribe(result => {this.treeData = result})
+        console.log('Renamed folder: ', result);
+
+      }
+    )
+
     console.log('Folder renamed!');
   }
 
   ngOnInit(): void {
     this.author = JSON!.parse(localStorage.getItem('user_data')!);
+    if (!this.author) this.author = JSON!.parse(sessionStorage.getItem('user_data')!);
     this.documentService.getTree().subscribe(
       (content) => {
         this.treeData = content

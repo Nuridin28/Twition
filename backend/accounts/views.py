@@ -3,10 +3,11 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import RegisterSerializer, UserSerializer, MyTokenObtainPairSerializer
+from .serializers import RegisterSerializer, UserSerializer, MyTokenObtainPairSerializer, UserUpdateSerializer
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny
+
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -62,6 +63,14 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
+    
+
+class UserUpdateView(generics.UpdateAPIView):
+    serializer_class = UserUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
         return self.request.user
