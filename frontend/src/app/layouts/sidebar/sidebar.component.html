@@ -2,53 +2,55 @@
   <!-- Search section -->
   <section>
     <form class="form-search">
-
-      <input type="text" id="form-search__input" class="poppins-400" placeholder="Search">
-
+      <input type="text" id="form-search__input" class="poppins-400" [placeholder]="'Search' | translate" />
       <button type="submit" class="form-search__btn">
-        <img src="/assets/images/search-icon.svg" alt="find">
+        <img src="/assets/images/search-icon.svg" alt="find" />
       </button>
-
     </form>
   </section>
 
+  <!-- Filters section -->
+  <div class="form-search-filter__label-tags-container">
+    <header class="form-search-filter__header">
+      <img src="/assets/images/filtro-icon.svg" alt="Filter icon" />
+      <span class="poppins-500">{{ 'Filters' | translate }}</span>
+    </header>
+    <div class="labels">
+      <label class="label-tag">
+        <input type="checkbox" class="label-tag__checkbox" />
+        <span class="label-tag__text">#Laravel</span>
+      </label>
+      <label class="label-tag">
+        <input type="checkbox" class="label-tag__checkbox" />
+        <span class="label-tag__text">#Angular</span>
+      </label>
+      <label class="label-tag">
+        <input type="checkbox" class="label-tag__checkbox" />
+        <span class="label-tag__text">#React</span>
+      </label>
+      <label class="label-tag">
+        <input type="checkbox" class="label-tag__checkbox" />
+        <span class="label-tag__text">#Doc</span>
+      </label>
+      <label class="label-tag">
+        <input type="checkbox" class="label-tag__checkbox" />
+        <span class="label-tag__text">#Html</span>
+      </label>
+      <label class="label-tag">
+        <input type="checkbox" class="label-tag__checkbox" />
+        <span class="label-tag__text">#Css</span>
+      </label>
+    </div>
+  </div>
 
-
-  <!-- filters section    -->
-  <section>
-    <form class="form-search-filter">
-
-      <header class="form-search-filter__header">
-        <img src="/assets/images/filtro-icon.svg">
-        <span class="poppins-500">Filtro</span>
-      </header>
-
-      <div class="form-search-filter__label-tags-container">
-
-        <label class="label-tag" for="label-tag__id">
-          <input id="label-tag__id" type="checkbox" class="label-tag__checkbox">
-          <span class="label-tag__text">#Laravel</span>
-        </label>
-
-        <!--        <button type="button" class="label-tags-container__btn">-->
-        <!--          <a href="/dashboard/search/tag-id" class="poppins-600 label-tags-container__label-tag">Laravel</a>-->
-        <!--        </button>-->
-      </div>
-
-    </form>
-  </section>
-
-  <!-- File explorer section  -->
+  <!-- File explorer section -->
   <section class="categories">
-
-    <!--    <p class="poppins-400 categories__label">File explorer</p>-->
-    <!--    <hr class="hr">-->
-
-    <app-file-explorer />
-
-
+    <p class="poppins-400 categories__label"></p>
+    <hr class="hr" />
+    <app-file-explorer></app-file-explorer>
   </section>
 
+  <!-- Bottom Buttons -->
   <section class="sidebar-buttons">
     <button class="sidebar-btn user" [routerLink]="['/profile']">
       <img src="/assets/icons/user-icon.svg" alt="User">
