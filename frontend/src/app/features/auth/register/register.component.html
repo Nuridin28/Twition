@@ -189,10 +189,6 @@
                     (click)="switchTheme('dark')">
                     {{ 'THEME.DARK' | translate }}
                 </button>
-                <button type="button" class="theme-button"
-                    [ngClass]="{'active': themeService.currentTheme === 'device'}" (click)="switchTheme('device')">
-                    {{ 'THEME.DEVICE' | translate }}
-                </button>
             </div>
         </form>
     </div>
