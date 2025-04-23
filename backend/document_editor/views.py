@@ -12,18 +12,17 @@ from .serilizers import *
 from .models import *
 
 
-def build_folder(folder):
+def build_folder_tree(folder):
     return {
         'id': folder.id,
         'authorId': folder.author.id,
         'title': folder.title,
         'type': 'folder',
         'expanded': False,
-        'parent': None,
+        'parent': folder.parent,
         'children': []
     }
 # Create your views here.
-
 class FilesTreeView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -42,7 +41,7 @@ class FilesTreeView(APIView):
                 'title': document.title,
                 'content': document.content,
                 'author': document.author.id,
-                'tags': [],
+                'tags': document.tags.all(),
                 'folderId': folder_id,
                 'createdAt': document.created_at,
                 'updatedAt': document.updated_at,
@@ -56,16 +55,18 @@ class FilesTreeView(APIView):
                 'title': folder.title,
                 'type': 'folder',
                 'expanded': False,
-                'parent': None,
-                'children': [build_folder_tree(child) for child in folder.children.all()] +
-                [serialize_document(document) for document in folder.documents.all()]
+                'parent': folder.parent,
+                'children': [build_folder_tree(child) for child in folder.children.filter(author=request.user)] +
+                            [serialize_document(document) for document in folder.documents.filter(author=request.user)]
             }
-        root_folders = Folder.objects.filter(parent=None)
-        root_documents = Document.objects.filter(folder=None)
+
+        root_folders = Folder.objects.filter(parent=None, author=request.user)
+        root_documents = Document.objects.filter(folder=None, author=request.user)
+
         data = ([serialize_document(document) for document in root_documents] +
                 [build_folder_tree(folder) for folder in root_folders])
-        # print(data)
         return Response(data)
+
 
 class FolderView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -80,26 +81,17 @@ class FolderView(APIView):
 
     def get(self, request, id=None):
         folder = Folder.objects.get(id=id)
-        return Response(build_folder(folder))
-
-    def put(self, request):
-        serializer = FolderSerializer(instance=Folder.objects.get(id=request.data['id']),
-                                      data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id=None):
-        folder = Folder.objects.get(id=id)
-        if folder:
-            folder.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(build_folder_tree(folder))
+        
 
 class DocumentView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        documents = Document.objects.all()
+        serializer = DocumentSerializer(documents, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         serializer = DocumentSerializer(data=request.data)
         if serializer.is_valid():

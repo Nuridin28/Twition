@@ -1,0 +1,45 @@
+<div class="container-1">
+
+
+    <app-sidebar></app-sidebar>
+
+    <div class="notes-container">
+        <div class="notes-header">
+            <h2>Notes Feed</h2>
+        </div>
+
+        <div *ngIf="loading" class="loading-container">
+            <div class="spinner"></div>
+            <p>Loading notes...</p>
+        </div>
+
+        <div *ngIf="!loading && notes.length === 0" class="empty-state">
+            <p>No notes available. Create your first note!</p>
+        </div>
+
+        <div *ngIf="!loading && notes.length > 0" class="notes-list">
+            <div *ngFor="let note of notes" class="note-card">
+                <div class="note-header">
+                    <h3>{{ note.title }}</h3>
+                    <div class="note-meta">
+                        <span class="note-author">{{ note.author }}</span>
+                        <span class="note-date">{{ formatDate(note.updated_at) }}</span>
+                    </div>
+                </div>
+
+                <div class="note-content">
+                    {{ note.content }}
+                </div>
+
+                <div class="note-footer">
+                    <div class="note-tags">
+                        <span *ngFor="let tag of note.tags" class="tag">
+                            {{ tag.name }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
